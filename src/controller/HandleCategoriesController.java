@@ -110,7 +110,21 @@ public class HandleCategoriesController {
 	@FXML
     void showSelectedCategory(ActionEvent event) {
     	System.out.println("showSelectedCategory called");
-    	//TODO
+    	String message = null;
+    	//Text fields should not be empty
+    	 if(!(categoryKeyTxt.getText().length() > 0)) {
+            	message = "Fyll i id för den kategori som ska visas.";
+            	messageTextArea.setText(message);
+                return;
+        }
+    	int categoryKeySelection = Integer.parseInt(categoryKeyTxt.getText());
+    	Category category = new Category();
+    	category = categoryRepo.getSelectedCategory(categoryKeySelection);
+    	int categoryKey = category.getCategoryKey();
+    	String categoryName = category.getCategoryName();
+    	messageTextArea.setText("Vald kategori: \n");
+    	messageTextArea.appendText("Id: " + categoryKey + "\n");
+    	messageTextArea.appendText("Namn: " + categoryName + "\n");   	
     }
 
     @FXML
