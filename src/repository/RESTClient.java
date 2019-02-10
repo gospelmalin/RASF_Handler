@@ -7,6 +7,8 @@ import javax.ws.rs.core.Form;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 
+import model.Category;
+
 
 /**
  * The Class RESTClient handles the communication with the API.
@@ -58,8 +60,8 @@ public class RESTClient {
 		GenericType<String> string = new GenericType<String>() {};
 		String s = rc.client
 				.target(REST_SERVICE_URL)
-			    .path("/{userid}")
-		        .resolveTemplate("userid", Integer.toString(categoryKey))
+			    .path("/{categoryKey}")
+		        .resolveTemplate("categoryKey", Integer.toString(categoryKey))
 				.request(MediaType.APPLICATION_XML)
 				.get(string); // get the XML representation
 		//print the XML representation
@@ -67,6 +69,68 @@ public class RESTClient {
 		return s;
 	}
 
+	/**
+	 * Call API to add category.
+	 *
+	 * @param category the Category
+	 * @return the string
+	 */
+	protected String addCategory(Category category) {
+		Form form = new Form();
+	    form.param("categoryKey", Integer.toString(category.getCategoryKey()));
+	    form.param("categoryName", category.getCategoryName());
+	    RESTClient rc = new RESTClient();
+	    String callResult = rc.client
+	       .target(REST_SERVICE_URL)
+	       .request(MediaType.APPLICATION_XML)
+	       .post(Entity.entity(form,
+	          MediaType.APPLICATION_FORM_URLENCODED_TYPE),
+	          String.class);
+	    String returnMessage = "Add category request returned: \n" + callResult;
+		
+	    System.out.println(returnMessage);
+	    return returnMessage;
+	}
 	
+	/**
+	 * Call API to update category.
+	 *
+	 * @param category the Category
+	 * @return the string
+	 */
+	protected String updateCategory(Category category) {
+		Form form = new Form();
+	    form.param("categoryKey", Integer.toString(category.getCategoryKey()));
+	    form.param("categoryName", category.getCategoryName());
+	    RESTClient rc = new RESTClient();
+	    String callResult = rc.client
+	       .target(REST_SERVICE_URL)
+	       .request(MediaType.APPLICATION_XML)
+	       .put(Entity.entity(form,
+	          MediaType.APPLICATION_FORM_URLENCODED_TYPE),
+	          String.class);
+	    String returnMessage = "Update category request returned: \n" + callResult;
+	    System.out.println(returnMessage);	    
+	return returnMessage;
+	}
+	
+	/**
+	 * Call API to delete category.
+	 *
+	 * @param category the Category
+	 * @return the string returnMessage
+	 */
+	protected String deleteCategory(Category category) {
+	 RESTClient rc = new RESTClient();
+	 String callResult = rc.client
+	         .target(REST_SERVICE_URL)
+	         .path("/{categoryKey}")
+	         .resolveTemplate("categoryKey", Integer.toString(category.getCategoryKey()))
+	         .request(MediaType.APPLICATION_XML)
+	         .delete(String.class);
+	 String returnMessage = "Delete category request returned: \n" + callResult;
+	 System.out.println(returnMessage);	
+	return returnMessage;
+	}
 
 }
