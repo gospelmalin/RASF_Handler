@@ -1,12 +1,18 @@
 package controller;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.MenuItem;
 
 /**
  * The Class RootLayoutController.
  */
 public class RootLayoutController {
+	
+	  @FXML
+	  private MenuItem helpMenuAbout;
+
 	
 	 /**
  	 * Handle exit.
