@@ -33,7 +33,7 @@ public class StartViewController {
 
     @FXML
     void openHandleCategories(ActionEvent event) {
-    	//ViewController.activate("HandleCategories");
+    	ViewController.activate("HandleCategories");
     	System.out.println("HandleCategoriesView should be shown.");
     }
 
