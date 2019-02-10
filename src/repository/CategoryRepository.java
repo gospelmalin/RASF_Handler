@@ -60,6 +60,40 @@ public class CategoryRepository {
 		return category;
 	}
 	
+	/**
+	 * add category call to the client.
+	 *
+	 * @return string message
+	 */
+	public String add(Category c1) {
+		RESTClient rc = new RESTClient();
+		String message = rc.addCategory(c1);
+		return message;	
+	}
+	
+	/**
+	 * Update category call to the client.
+	 *
+	 * @return string message
+	 */
+	public String update(Category c1) {
+		RESTClient rc = new RESTClient();
+		String message = rc.updateCategory(c1);
+		return message;	
+	}
+	
+	/**
+	 * Delete user call to the client.
+	 *
+	 * @return string message
+	 */
+	public String delete(Category c1) {
+		RESTClient rc = new RESTClient();
+		String message = rc.deleteCategory(c1);
+		return message;	
+	}
+	
+	
 	private ArrayList<Category> jaxbXmlStringToObject(String xmlString) { 
 		ArrayList<Category> categoriesList =  new ArrayList<Category>();
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance(); 
