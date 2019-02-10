@@ -17,8 +17,11 @@ import org.xml.sax.SAXException;
 
 import model.Category;
 
+/**
+ * The Class CategoryRepository separates the Controller from the RESTClient and handles the
+ * parsing of the xmlString the client receives from the server.
+ */
 public class CategoryRepository {
-
 	
 	/**
 	 * Get all users call to the client.
@@ -39,6 +42,22 @@ public class CategoryRepository {
 		*/
 		//Until here
 		return categoriesList;
+	}
+	
+	/**
+	 * Get selected category call to the client.
+	 *
+	 * @return the user
+	 */
+	public Category getSelectedCategory(int categoryKeyQuery) {
+		RESTClient rc = new RESTClient();
+		String xmlString = rc.getSelectedCategory(categoryKeyQuery);
+		ArrayList<Category> categoriesList =  new ArrayList<Category>();
+		categoriesList = jaxbXmlStringToObject(xmlString);
+		int categoryKey = categoriesList.get(0).getCategoryKey();
+		String categoryName = categoriesList.get(0).getCategoryName();
+		Category category = new Category(categoryKey, categoryName);
+		return category;
 	}
 	
 	private ArrayList<Category> jaxbXmlStringToObject(String xmlString) { 
