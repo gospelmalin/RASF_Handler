@@ -21,8 +21,11 @@ public class RESTClient {
 	
 	// URLs as static strings for ease of use and more readable code.
 	/** The  URL used to Search for categories in RASF. */
-	private static String REST_SERVICE_URL = "http://localhost:8081/RASF/rest/CategoryService/categories"; 
-	
+	private static String REST_SERVICE_URL_CAT = "http://localhost:8081/RASF/rest/CategoryService/categories"; 
+	/** The  URL used to Search for items in RASF. */
+	private static String REST_SERVICE_URL_IT = "http://localhost:8081/RASF/rest/ItemService/items"; 
+	/** The  URL used to Search for storageplaces in RASF. */
+	private static String REST_SERVICE_URL_STO = "http://localhost:8081/RASF/rest/StorageplaceService/storageplaces"; 
 	
 	/**
 	 * Instantiates a new API client.
@@ -42,7 +45,7 @@ public class RESTClient {
 		RESTClient rc = new RESTClient();
 		GenericType<String> string = new GenericType<String>() {};
 		String s = rc.client
-				.target(REST_SERVICE_URL)
+				.target(REST_SERVICE_URL_CAT)
 				.request(MediaType.APPLICATION_XML)
 				.get(string); // get the XML representation
 		//print the XML representation
@@ -60,7 +63,7 @@ public class RESTClient {
 		RESTClient rc = new RESTClient();
 		GenericType<String> string = new GenericType<String>() {};
 		String s = rc.client
-				.target(REST_SERVICE_URL)
+				.target(REST_SERVICE_URL_CAT)
 			    .path("/{categoryKey}")
 		        .resolveTemplate("categoryKey", Integer.toString(categoryKey))
 				.request(MediaType.APPLICATION_XML)
@@ -82,7 +85,7 @@ public class RESTClient {
 	    System.out.println("this is categoryName param: " + category.getCategoryName()); //TODO TEMP
 	    RESTClient rc = new RESTClient();
 	    String callResult = rc.client
-	       .target(REST_SERVICE_URL)
+	       .target(REST_SERVICE_URL_CAT)
 	       .request(MediaType.APPLICATION_XML)
 	       .post(Entity.entity(form,
 	          MediaType.APPLICATION_FORM_URLENCODED_TYPE),
@@ -105,7 +108,7 @@ public class RESTClient {
 	    form.param("categoryName", category.getCategoryName());
 	    RESTClient rc = new RESTClient();
 	    String callResult = rc.client
-	       .target(REST_SERVICE_URL)
+	       .target(REST_SERVICE_URL_CAT)
 	       .path("/{categoryKey}")
 	       .resolveTemplate("categoryKey", Integer.toString(category.getCategoryKey()))
 	       .request(MediaType.APPLICATION_XML)
@@ -126,7 +129,7 @@ public class RESTClient {
 	protected String deleteCategory(Category category) {
 	 RESTClient rc = new RESTClient();
 	 String callResult = rc.client
-	         .target(REST_SERVICE_URL)
+	         .target(REST_SERVICE_URL_CAT)
 	         .path("/{categoryKey}")
 	         .resolveTemplate("categoryKey", Integer.toString(category.getCategoryKey()))
 	         .request(MediaType.APPLICATION_XML)
@@ -134,6 +137,46 @@ public class RESTClient {
 	 String returnMessage = "Delete category request returned: \n" + callResult;
 	 System.out.println(returnMessage);	
 	return returnMessage;
+	}
+
+	
+	// ITEM QUERIES
+	
+	/**
+	 * Query API for all items.
+	 *
+	 * @return the string
+	 */
+	protected String getAllItems() {
+		RESTClient rc = new RESTClient();
+		GenericType<String> string = new GenericType<String>() {};
+		String s = rc.client
+				.target(REST_SERVICE_URL_IT)
+				.request(MediaType.APPLICATION_XML)
+				.get(string); // get the XML representation
+		//print the XML representation
+		System.out.println(s); // Kept for reference only
+		return s;
+	}
+	
+	/**
+	 * Query API for selected item.
+	 *
+	 * @param itemKey the item key
+	 * @return the string
+	 */
+	protected String getSelectedItem(int itemKey) {
+		RESTClient rc = new RESTClient();
+		GenericType<String> string = new GenericType<String>() {};
+		String s = rc.client
+				.target(REST_SERVICE_URL_IT)
+			    .path("/{itemKey}")
+		        .resolveTemplate("itemKey", Integer.toString(itemKey))
+				.request(MediaType.APPLICATION_XML)
+				.get(string); // get the XML representation
+		//print the XML representation
+		System.out.println(s); // Kept for reference only
+		return s;
 	}
 
 }
