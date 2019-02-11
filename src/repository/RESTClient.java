@@ -6,6 +6,7 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Form;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import model.Category;
 
@@ -77,8 +78,8 @@ public class RESTClient {
 	 */
 	protected String addCategory(Category category) {
 		Form form = new Form();
-	    form.param("categoryKey", Integer.toString(category.getCategoryKey()));
 	    form.param("categoryName", category.getCategoryName());
+	    System.out.println("this is categoryName param: " + category.getCategoryName()); //TODO TEMP
 	    RESTClient rc = new RESTClient();
 	    String callResult = rc.client
 	       .target(REST_SERVICE_URL)
@@ -86,12 +87,12 @@ public class RESTClient {
 	       .post(Entity.entity(form,
 	          MediaType.APPLICATION_FORM_URLENCODED_TYPE),
 	          String.class);
-	    String returnMessage = "Add category request returned: \n" + callResult;
-		
+	    String returnMessage = "Add category request returned: \n" + callResult;		
 	    System.out.println(returnMessage);
 	    return returnMessage;
 	}
-	
+
+
 	/**
 	 * Call API to update category.
 	 *
@@ -100,11 +101,13 @@ public class RESTClient {
 	 */
 	protected String updateCategory(Category category) {
 		Form form = new Form();
-	    form.param("categoryKey", Integer.toString(category.getCategoryKey()));
+	   form.param("categoryKey", Integer.toString(category.getCategoryKey()));
 	    form.param("categoryName", category.getCategoryName());
 	    RESTClient rc = new RESTClient();
 	    String callResult = rc.client
 	       .target(REST_SERVICE_URL)
+	       .path("/{categoryKey}")
+	       .resolveTemplate("categoryKey", Integer.toString(category.getCategoryKey()))
 	       .request(MediaType.APPLICATION_XML)
 	       .put(Entity.entity(form,
 	          MediaType.APPLICATION_FORM_URLENCODED_TYPE),
