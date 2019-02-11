@@ -130,20 +130,63 @@ public class HandleCategoriesController {
     @FXML
     void addCategory(ActionEvent event) {
     	System.out.println("addCategory called");
-    	//TODO
+    	String message = null;
+        //Text fields cannot be empty
+        if(!(categoryNameTxt.getText().length() > 0)) {
+        	message = "Enter name before trying to add a category.";
+        	messageTextArea.setText(message);
+            return;
+        }
+        // New category instance			
+		Category c1 = new Category();
+		//c1.setCategoryKey(Integer.parseInt(categoryKeyTxt.getText()));
+		c1.setCategoryName(categoryNameTxt.getText());
+		message = categoryRepo.add(c1); //TODO
+        messageTextArea.setText(message); //TODO
+        //update table
+        updateTable();
     }
     
     @FXML
     void updateCategory(ActionEvent event) {
     	System.out.println("updateCategory called");
-    	//TODO
+    	Category c1 = new Category();
+    	String message = null;
+    	//Text fields should not be empty
+    	if(!(categoryNameTxt.getText().length() > 0)) {
+        	message = "Fyll i nytt namn för den kategori som ska uppdateras.";
+        	messageTextArea.setText(message);
+            return;
+        }
+    	if(!(categoryKeyTxt.getText().length() > 0)) {
+        	message = "Fyll i id för den kategori som ska uppdateras";
+        	messageTextArea.setText(message);
+            return;
+        }
+    	c1.setCategoryKey(Integer.parseInt(categoryKeyTxt.getText()));
+		c1.setCategoryName(categoryNameTxt.getText());
+    	message = categoryRepo.update(c1);
+        messageTextArea.setText(message);
+    	updateTable();
     }
     
     
     @FXML
     void deleteCategory(ActionEvent event) {
     	System.out.println("deleteCategory called");
-    	//TODO
+    	Category cat = new Category();
+    	String message = null;
+    	if(!(categoryKeyTxt.getText().length() > 0)) {
+        	message = "Fyll i id för den kategori som ska tas bort.";
+        	messageTextArea.setText(message);
+            return;
+        }
+    	cat.setCategoryKey(Integer.parseInt(categoryKeyTxt.getText()));
+    	cat.setCategoryName(categoryNameTxt.getText());
+        message = categoryRepo.delete(cat);
+        messageTextArea.setText(message); //TODO
+        //update table
+        updateTable();
     }
 
  
