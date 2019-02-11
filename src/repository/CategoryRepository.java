@@ -24,9 +24,9 @@ import model.Category;
 public class CategoryRepository {
 	
 	/**
-	 * Get all users call to the client.
+	 * Get all categories call to the client.
 	 *
-	 * @return the array list of users
+	 * @return the array list of categories
 	 */
 	public ArrayList<Category> getAllCategories() {
 		RESTClient rc = new RESTClient();
@@ -47,7 +47,7 @@ public class CategoryRepository {
 	/**
 	 * Get selected category call to the client.
 	 *
-	 * @return the user
+	 * @return the category
 	 */
 	public Category getSelectedCategory(int categoryKeyQuery) {
 		RESTClient rc = new RESTClient();
@@ -83,7 +83,7 @@ public class CategoryRepository {
 	}
 	
 	/**
-	 * Delete user call to the client.
+	 * Delete category call to the client.
 	 *
 	 * @return string message
 	 */
