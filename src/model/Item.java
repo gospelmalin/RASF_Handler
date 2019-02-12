@@ -23,6 +23,8 @@ public class Item implements Serializable {
 	
 	private int storageplaceKey;
 	private String storageplaceName; 
+	
+	private int numberToBuy;
 
 	// Constructors
 	public Item(){}
@@ -73,6 +75,21 @@ public class Item implements Serializable {
 		this.categoryName = categoryName;
 		this.storageplaceKey = storageplaceKey;
 		this.storageplaceName = storageplaceName;
+	}
+	
+	public Item(int itemKey, int categoryKey, String itemName, int unitsAlways, String available, int numberOfUnits,
+			String categoryName, int storageplaceKey, String storageplaceName, int numberToBuy) {
+		super();
+		this.itemKey = itemKey;
+		this.categoryKey = categoryKey;
+		this.itemName = itemName;
+		this.unitsAlways = unitsAlways;
+		this.available = available;
+		this.numberOfUnits = numberOfUnits;
+		this.categoryName = categoryName;
+		this.storageplaceKey = storageplaceKey;
+		this.storageplaceName = storageplaceName;
+		this.numberToBuy = numberToBuy;
 	}
 	
 	public Item(int itemKey, String itemName, int unitsAlways, String available, int numberOfUnits) {
@@ -178,6 +195,20 @@ public class Item implements Serializable {
 			this.storageplaceName = storageplaceName;
 		}
 
+		/**
+		 * @return the numberToBuy
+		 */
+		public int getNumberToBuy() {
+			return numberToBuy;
+		}
+
+		/**
+		 * @param numberToBuy the numberToBuy to set
+		 */
+		public void setNumberToBuy(int numberToBuy) {
+			this.numberToBuy = numberToBuy;
+		}
+
 		@Override
 		   public boolean equals(Object object){
 		      
@@ -206,7 +237,7 @@ public class Item implements Serializable {
 			return "Item [itemKey=" + itemKey + ", categoryKey=" + categoryKey + ", itemName=" + itemName
 					+ ", unitsAlways=" + unitsAlways + ", available=" + available + ", numberOfUnits=" + numberOfUnits
 					+ ", categoryName=" + categoryName + ", storageplaceKey=" + storageplaceKey + ", storageplaceName="
-					+ storageplaceName + "]";
+					+ storageplaceName +", numberToBuy=" + numberToBuy +"]";
 		}
 		
 		
