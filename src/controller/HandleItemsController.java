@@ -131,7 +131,7 @@ public class HandleItemsController {
     	itemNameCol.setCellValueFactory(new PropertyValueFactory<Item, String>("itemName"));
     	categoryNameCol.setCellValueFactory(new PropertyValueFactory<Item, String>("categoryName"));
     	unitsAlwaysCol.setCellValueFactory(new PropertyValueFactory<Item, Integer>("unitsAlways"));
-    	numberOfUnitsCol.setCellValueFactory(new PropertyValueFactory<Item, Integer>("numberOfUnit"));
+    	numberOfUnitsCol.setCellValueFactory(new PropertyValueFactory<Item, Integer>("numberOfUnits"));
     	storageplaceNameCol.setCellValueFactory(new PropertyValueFactory<Item, String>("storageplaceName"));
     	storageplaceKeyCol.setCellValueFactory(new PropertyValueFactory<Item, Integer>("storageplaceKey"));
     	availableCol.setCellValueFactory(new PropertyValueFactory<Item, String>("available"));    	
