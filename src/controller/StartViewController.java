@@ -45,7 +45,7 @@ public class StartViewController {
 
     @FXML
     void openHandleStorage(ActionEvent event) {
-    	//ViewController.activate("HandleStorage");
+    	ViewController.activate("HandleStorage");
     	System.out.println("HandleStorageView should be shown.");
     }
 
