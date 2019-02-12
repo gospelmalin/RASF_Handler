@@ -120,7 +120,7 @@ public class HandleItemsController {
     //This method is automatically called after the fxml file has been loaded.
     @FXML
     private void initialize () {
-    	System.out.println("HandleItemsController initiated!");  //TODO något är galet här??
+    	System.out.println("HandleItemsController initiated!");
 	
     	// mouseclick eventhandler
     	itemTable.setOnMouseClicked(this::TableClicked);
