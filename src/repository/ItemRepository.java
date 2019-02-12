@@ -94,15 +94,12 @@ public class ItemRepository {
 	 *
 	 * @return string message
 	 */
-	//TODO
-	/*
 	public String delete(Item item) {
 		RESTClient rc = new RESTClient();
 		String message = rc.deleteItem(item);
 		return message;	
 	}
-	*/
-	
+
 	
 	private ArrayList<Item> jaxbXmlStringToObject(String xmlString) { 
 		ArrayList<Item> itemsList =  new ArrayList<Item>();
