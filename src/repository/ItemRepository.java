@@ -90,16 +90,18 @@ public class ItemRepository {
 	*/
 	
 	/**
-	 * Delete user call to the client.
+	 * Delete item call to the client.
 	 *
 	 * @return string message
 	 */
+	// Method removed - not allowed to delete items
+	/*
 	public String delete(Item item) {
 		RESTClient rc = new RESTClient();
 		String message = rc.deleteItem(item);
 		return message;	
 	}
-
+*/
 	
 	private ArrayList<Item> jaxbXmlStringToObject(String xmlString) { 
 		ArrayList<Item> itemsList =  new ArrayList<Item>();
