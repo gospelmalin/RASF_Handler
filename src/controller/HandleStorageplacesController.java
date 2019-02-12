@@ -131,7 +131,6 @@ public class HandleStorageplacesController {
 	    @FXML
 	    void addStorageplace(ActionEvent event) {
 	    	System.out.println("addStorageplace called");
-	    	/*
 	    	String message = null;
 	        //Text fields cannot be empty
 	        if(!(storageplaceNameTxt.getText().length() > 0)) {
@@ -139,7 +138,7 @@ public class HandleStorageplacesController {
 	        	messageTextArea.setText(message);
 	            return;
 	        }
-	        // New category instance			
+	        // New storageplace instance			
 	        Storageplace sto1 = new Storageplace();
 			//sto1.setStorageplaceKey(Integer.parseInt(storageplaceKeyTxt.getText()));
 			sto1.setStorageplaceName(storageplaceNameTxt.getText());
@@ -147,13 +146,13 @@ public class HandleStorageplacesController {
 	        messageTextArea.setText(message); //TODO
 	        //update table
 	        updateTable();
-	        */
+
 	    }
 	    
 	    @FXML
 	    void updateStorageplace(ActionEvent event) {
 	    	System.out.println("updateStorageplace called");
-	    	/*
+	    	
 	    	Storageplace sto1 = new Storageplace();
 	    	String message = null;
 	    	//Text fields should not be empty
@@ -172,14 +171,14 @@ public class HandleStorageplacesController {
 	    	message = storageplaceRepo.update(sto1);
 	        messageTextArea.setText(message);
 	    	updateTable();
-	    	*/
+	    	
 	    }
 	    
 	    
 	    @FXML
 	    void deleteStorageplace(ActionEvent event) {
 	    	System.out.println("deleteStorageplace called");
-	    	/*
+	    	
 	    	Storageplace sto = new Storageplace();
 	    	String message = null;
 	    	if(!(storageplaceKeyTxt.getText().length() > 0)) {
@@ -193,7 +192,7 @@ public class HandleStorageplacesController {
 	        messageTextArea.setText(message); //TODO
 	        //update table
 	        updateTable();
-	        */
+	        
 	    }
 
 	 
