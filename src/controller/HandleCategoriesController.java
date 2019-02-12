@@ -62,7 +62,7 @@ public class HandleCategoriesController {
     //This method is automatically called after the fxml file has been loaded.
     @FXML
     private void initialize () {
-    	System.out.println("ShowUsersController initiated!");
+    	System.out.println("HandleCategoriesController initiated!");
 	
     	// mouseclick eventhandler
     	categoryTable.setOnMouseClicked(this::TableClicked);
