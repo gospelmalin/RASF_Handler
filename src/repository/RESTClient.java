@@ -178,5 +178,48 @@ public class RESTClient {
 		System.out.println(s); // Kept for reference only
 		return s;
 	}
+	
+	
+	//TODO
+	
+	// STORAGEPLACES QUERIES
+	
+	/**
+	 * Query API for all storageplaces.
+	 *
+	 * @return the string
+	 */
+	protected String getAllStorageplaces() {
+		RESTClient rc = new RESTClient();
+		GenericType<String> string = new GenericType<String>() {};
+		String s = rc.client
+				.target(REST_SERVICE_URL_STO)
+				.request(MediaType.APPLICATION_XML)
+				.get(string); // get the XML representation
+		//print the XML representation
+		System.out.println(s); // Kept for reference only
+		return s;
+	}
+	
+	/**
+	 * Query API for selected storageplace.
+	 *
+	 * @param storageplaceKey the storageplace key
+	 * @return the string
+	 */
+	protected String getSelectedStorageplace(int storageplaceKey) {
+		RESTClient rc = new RESTClient();
+		GenericType<String> string = new GenericType<String>() {};
+		String s = rc.client
+				.target(REST_SERVICE_URL_STO)
+			    .path("/{storageplaceKey}")
+		        .resolveTemplate("storageplaceKey", Integer.toString(storageplaceKey))
+				.request(MediaType.APPLICATION_XML)
+				.get(string); // get the XML representation
+		//print the XML representation
+		System.out.println(s); // Kept for reference only
+		return s;
+	}
+	
 
 }
