@@ -68,14 +68,12 @@ public class ItemRepository {
 	 *
 	 * @return string message
 	 */
-	//TODO
-	/*
 	public String add(Item i1) {
 		RESTClient rc = new RESTClient();
 		String message = rc.addItem(i1);
 		return message;	
 	}
-	*/
+
 	
 	/**
 	 * Update category call to the client.
