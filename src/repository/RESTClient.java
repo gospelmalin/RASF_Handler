@@ -9,6 +9,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import model.Category;
+import model.Storageplace;
 
 
 /**
@@ -222,4 +223,70 @@ public class RESTClient {
 	}
 	
 
+	/**
+	 * Call API to add storageplace.
+	 *
+	 * @param storageplace the Storageplace
+	 * @return the string
+	 */
+	protected String addStorageplace(Storageplace storageplace) {
+		Form form = new Form();
+	    form.param("storageplaceName", storageplace.getStorageplaceName());
+	    System.out.println("this is storageplaceName param: " + storageplace.getStorageplaceName()); //TODO TEMP
+	    RESTClient rc = new RESTClient();
+	    String callResult = rc.client
+	       .target(REST_SERVICE_URL_STO)
+	       .request(MediaType.APPLICATION_XML)
+	       .post(Entity.entity(form,
+	          MediaType.APPLICATION_FORM_URLENCODED_TYPE),
+	          String.class);
+	    String returnMessage = "Add storageplace request returned: \n" + callResult;		
+	    System.out.println(returnMessage);
+	    return returnMessage;
+	}
+
+
+	/**
+	 * Call API to update storageplace.
+	 *
+	 * @param storageplace the Storageplace
+	 * @return the string
+	 */
+	protected String updateStorageplace(Storageplace storageplace) {
+		Form form = new Form();
+	   form.param("storageplaceKey", Integer.toString(storageplace.getStorageplaceKey()));
+	    form.param("storageplaceName", storageplace.getStorageplaceName());
+	    RESTClient rc = new RESTClient();
+	    String callResult = rc.client
+	       .target(REST_SERVICE_URL_STO)
+	       .path("/{storageplaceKey}")
+	       .resolveTemplate("storageplaceKey", Integer.toString(storageplace.getStorageplaceKey()))
+	       .request(MediaType.APPLICATION_XML)
+	       .put(Entity.entity(form,
+	          MediaType.APPLICATION_FORM_URLENCODED_TYPE),
+	          String.class);
+	    String returnMessage = "Update storageplace request returned: \n" + callResult;
+	    System.out.println(returnMessage);	    
+	return returnMessage;
+	}
+	
+	/**
+	 * Call API to delete storageplace.
+	 *
+	 * @param storageplace the Storageplace
+	 * @return the string returnMessage
+	 */
+	protected String deleteStorageplace(Storageplace storageplace) {
+	 RESTClient rc = new RESTClient();
+	 String callResult = rc.client
+	         .target(REST_SERVICE_URL_STO)
+	         .path("/{storageplaceKey}")
+	         .resolveTemplate("storageplaceKey", Integer.toString(storageplace.getStorageplaceKey()))
+	         .request(MediaType.APPLICATION_XML)
+	         .delete(String.class);
+	 String returnMessage = "Delete storageplace request returned: \n" + callResult;
+	 System.out.println(returnMessage);	
+	return returnMessage;
+	}
+	
 }
