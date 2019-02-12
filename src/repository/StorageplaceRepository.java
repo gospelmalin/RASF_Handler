@@ -63,42 +63,35 @@ public class StorageplaceRepository {
 	 *
 	 * @return string message
 	 */
-	//TODO
-	/*
 	public String add(Storageplace s1) {
 		RESTClient rc = new RESTClient();
 		String message = rc.addStorageplace(s1);
 		return message;	
 	}
-	*/
+
 	
 	/**
 	 * Update storageplace call to the client.
 	 *
 	 * @return string message
 	 */
-	//TODO
-	/*
 	public String update(Storageplace s1) {
 		RESTClient rc = new RESTClient();
 		String message = rc.updateStorageplace(s1);
 		return message;	
 	}
-	*/
+
 	
 	/**
 	 * Delete user call to the client.
 	 *
 	 * @return string message
 	 */
-	//TODO
-	/*
 	public String delete(Storageplace storageplace) {
 		RESTClient rc = new RESTClient();
 		String message = rc.deleteStorageplace(storageplace);
 		return message;	
 	}
-	*/
 	
 	
 	private ArrayList<Storageplace> jaxbXmlStringToObject(String xmlString) { 
