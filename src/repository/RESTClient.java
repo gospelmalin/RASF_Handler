@@ -1,5 +1,6 @@
 package repository;
 
+import javax.ws.rs.FormParam;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -218,8 +219,14 @@ public class RESTClient {
 	 */
 	protected String updateItem(Item item) {
 		Form form = new Form();
-	   form.param("itemKey", Integer.toString(item.getItemKey()));
-	    form.param("itemName", item.getItemName());
+		form.param("categoryKey", Integer.toString(item.getCategoryKey())); 
+		form.param("itemName", item.getItemName()); 
+		form.param("unitsAlways", Integer.toString(item.getUnitsAlways())); 
+		form.param("available", item.getAvailable());
+		form.param("numberOfUnits", Integer.toString(item.getNumberOfUnits()));   
+		form.param("categoryName", item.getCategoryName());
+		form.param("storageplaceKey", Integer.toString(item.getStorageplaceKey()));
+		form.param("storageplaceName", item.getStorageplaceName());
 	    RESTClient rc = new RESTClient();
 	    String callResult = rc.client
 	       .target(REST_SERVICE_URL_IT)
