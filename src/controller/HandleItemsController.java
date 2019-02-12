@@ -250,10 +250,8 @@ public class HandleItemsController {
 	
     @FXML
     void deleteItem(ActionEvent event) {
-    	System.out.println("delete called");
-		//TODO
+    	System.out.println("delete called - delete items not allowed");
     }
-
 
     private void updateListOfCategories() {
 
@@ -261,7 +259,7 @@ public class HandleItemsController {
         CategoryRepository cr = new CategoryRepository();
         ArrayList<Category> categoryArray = cr.getAllCategories();
 
-        //We loop through every category name in the category hashmap array.
+        //loop through every category name in the category hashmap array.
         for(Category category : categoryArray) {
             categoryWithId.put(category.getCategoryName(), category.getCategoryKey());
         }
@@ -278,7 +276,7 @@ public class HandleItemsController {
         StorageplaceRepository sr = new StorageplaceRepository();
         ArrayList<Storageplace> storageplaceArray = sr.getAllStorageplaces();
 
-        //We loop through every storageplace name in the storageplace hashmap array.
+        // loop through every storageplace name in the storageplace hashmap array.
         for(Storageplace storageplace : storageplaceArray) {
             storageplaceWithId.put(storageplace.getStorageplaceName(), storageplace.getStorageplaceKey());
         }
