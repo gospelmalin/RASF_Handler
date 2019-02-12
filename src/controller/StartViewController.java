@@ -39,7 +39,7 @@ public class StartViewController {
 
     @FXML
     void openHandleItems(ActionEvent event) {
-    	//ViewController.activate("HandleItems");
+    	ViewController.activate("HandleItems");
     	System.out.println("HandleItemsView should be shown.");
     }
 
