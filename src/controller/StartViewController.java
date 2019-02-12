@@ -51,7 +51,7 @@ public class StartViewController {
 
     @FXML
     void openShoppingList(ActionEvent event) {
-    	//ViewController.activate("ShoppingList");
+    	ViewController.activate("ShoppingList");
     	System.out.println("ShoppingListView should be shown.");
     }
 

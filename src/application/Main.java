@@ -84,7 +84,7 @@ public class Main extends Application {
             viewcontroller.addScreen("HandleCategories", FXMLLoader.load(getClass().getResource("/view/HandleCategoriesView.fxml")));
             viewcontroller.addScreen("HandleItems", FXMLLoader.load(getClass().getResource("/view/HandleItemsView.fxml")));
             viewcontroller.addScreen("HandleStorage", FXMLLoader.load(getClass().getResource("/view/HandleStorageplacesView.fxml")));
-        //  viewcontroller.addScreen("ShoppingList", FXMLLoader.load(getClass().getResource("/view/ShoppingListView.fxml")));
+            viewcontroller.addScreen("ShoppingList", FXMLLoader.load(getClass().getResource("/view/ShoppingListView.fxml")));
             
             //ViewControllers(scene);
             // Set Start view into the center of root layout.
