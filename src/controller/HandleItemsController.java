@@ -246,6 +246,57 @@ public class HandleItemsController {
 	@FXML
 	void updateItem(ActionEvent event) {
 		System.out.println("updateItem called");
+		Item i1 = new Item();
+    	String message = null;
+    	//Text fields should not be empty
+    	if(!(categoryKeyTxt.getText().length() > 0)) {
+        	message = "Kategori-id saknas. Välj kategori för den matvara som ska uppdateras i dropdown-listan";
+        	messageTextArea.setText(message);
+            return;
+        }
+    	if(!(itemNameTxt.getText().length() > 0)) {
+        	message = "Fyll i nytt namn för den matvara som ska uppdateras.";
+        	messageTextArea.setText(message);
+            return;
+        }
+    	if(!(itemKeyTxt.getText().length() > 0)) {
+        	message = "Id saknas. Välj i tabellen den matvara som ska uppdateras";
+        	messageTextArea.setText(message);
+            return;
+        }
+    	if(!(alwaysAtHomeTxt.getText().length() > 0)) {
+        	message = "Antal alltid hemma saknas. Ange hur många förpackningar av matvaran som alltid ska finnas hemma.";
+        	messageTextArea.setText(message);
+            return;
+        }
+    	if(!(numberOfUnitsTxt.getText().length() > 0)) {
+        	message = "Antal förpackningar saknas. Ange hur många förpackningar som finns av matvaran efter uppdatering.";
+        	messageTextArea.setText(message);
+            return;
+        }
+    	if(!(storageplaceKeyTxt.getText().length() > 0)) {
+        	message = "Förpackningsid saknas. Välj förvaringsplats för matvaran i dropdown-listan";
+        	messageTextArea.setText(message);
+            return;
+        }
+    	if(!(availableTxt.getText().length() > 0)) {
+    		if(Integer.parseInt(numberOfUnitsTxt.getText())>0) {
+    			availableTxt.setText("YES");
+    		}
+    		else {
+    			availableTxt.setText("NO");
+    		}
+        }
+    	i1.setItemKey(Integer.parseInt(itemKeyTxt.getText()));
+    	i1.setCategoryKey(Integer.parseInt(categoryKeyTxt.getText()));
+		i1.setItemName(itemNameTxt.getText());
+		i1.setUnitsAlways(Integer.parseInt(alwaysAtHomeTxt.getText()));
+		i1.setAvailable(availableTxt.getText());
+		i1.setNumberOfUnits(Integer.parseInt(numberOfUnitsTxt.getText()));
+		i1.setStorageplaceKey(Integer.parseInt(storageplaceKeyTxt.getText()));
+    	message = itemRepo.update(i1);
+        messageTextArea.setText(message);
+    	updateTable();
 	}
 	
     @FXML
