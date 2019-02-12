@@ -196,5 +196,18 @@ public class Item implements Serializable {
 		         }			
 		      }
 		      return false;
-		   }	
+		   }
+
+		/* (non-Javadoc)
+		 * @see java.lang.Object#toString()
+		 */
+		@Override
+		public String toString() {
+			return "Item [itemKey=" + itemKey + ", categoryKey=" + categoryKey + ", itemName=" + itemName
+					+ ", unitsAlways=" + unitsAlways + ", available=" + available + ", numberOfUnits=" + numberOfUnits
+					+ ", categoryName=" + categoryName + ", storageplaceKey=" + storageplaceKey + ", storageplaceName="
+					+ storageplaceName + "]";
+		}
+		
+		
 }
