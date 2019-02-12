@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.HandleItemsController">
+   <children>
+      <Label layoutX="20.0" layoutY="5.0" prefHeight="37.0" prefWidth="494.0" text="Matvaror">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="20.0" layoutY="28.0" prefHeight="37.0" prefWidth="494.0" text="Lägg till, uppdatera, ta bort">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TableView fx:id="itemTable" layoutX="5.0" layoutY="60.0" prefHeight="186.0" prefWidth="592.0">
+        <columns>
+          <TableColumn fx:id="itemKeyCol" prefWidth="38.333343505859375" text="Id" />
+            <TableColumn fx:id="categoryKeyCol" prefWidth="46.666656494140625" text="Kategori id" visible="false" />
+          <TableColumn fx:id="itemNameCol" prefWidth="171.33331298828125" text="Matvara" />
+            <TableColumn fx:id="categoryNameCol" prefWidth="163.3333740234375" text="Kategori" />
+            <TableColumn fx:id="numberOfUnitsCol" minWidth="0.0" prefWidth="40.6666259765625" text="Antal" />
+            <TableColumn fx:id="storageplaceNameCol" prefWidth="132.66668701171875" text="Plats" />
+            <TableColumn fx:id="availableCol" prefWidth="39.0" text="Finns?" />
+            <TableColumn fx:id="unitsAlwaysCol" minWidth="0.0" prefWidth="3.0" text="Alltid hemma" visible="false" />
+            <TableColumn fx:id="storageplaceKeyCol" minWidth="5.33331298828125" prefWidth="5.33331298828125" text="Platsid" visible="false" />
+        </columns>
+      </TableView>
+      <TextField fx:id="itemKeyTxt" editable="false" layoutX="6.0" layoutY="264.0" prefHeight="25.0" prefWidth="42.0" promptText="id" />
+      <TextField fx:id="itemNameTxt" layoutX="55.0" layoutY="265.0" prefHeight="25.0" prefWidth="194.0" promptText="Namn" />
+      <Label layoutX="11.0" layoutY="249.0" text="Id" />
+      <Label layoutX="59.0" layoutY="249.0" text="Matvarunamn" />
+      <TextArea fx:id="messageTextArea" editable="false" layoutX="16.0" layoutY="340.0" prefHeight="55.0" prefWidth="318.0" wrapText="true" />
+      <Label layoutX="16.0" layoutY="325.0" text="Meddelande" />
+      <Button fx:id="showItemBtn" layoutX="511.0" layoutY="265.0" mnemonicParsing="false" onAction="#showSelectedItem" prefHeight="25.0" prefWidth="86.0" text="Visa matvara" wrapText="true" />
+      <Button fx:id="addItemBtn" layoutX="342.0" layoutY="304.0" mnemonicParsing="false" onAction="#addItem" prefHeight="25.0" prefWidth="86.0" text="Lägg till ny" wrapText="true" />
+      <Button fx:id="updateItemBtn" layoutX="436.0" layoutY="304.0" mnemonicParsing="false" onAction="#updateItem" prefHeight="25.0" prefWidth="86.0" text="Uppdatera" textAlignment="CENTER" wrapText="true" />
+      <Button fx:id="deleteItemBtn" layoutX="342.0" layoutY="336.0" mnemonicParsing="false" onAction="#deleteItem" prefHeight="25.0" prefWidth="86.0" text="Ta bort" textAlignment="CENTER" wrapText="true" />
+      <Button fx:id="homeBtn" layoutX="545.0" layoutY="15.0" mnemonicParsing="false" onAction="#openStartView" text="Hem" />
+      <TextField fx:id="categoryNameTxt" layoutX="255.0" layoutY="28.0" prefHeight="25.0" prefWidth="209.0" promptText="Kategori" />
+      <Label layoutX="255.0" layoutY="249.0" text="Kategori" />
+      <TextField fx:id="categoryKeyTxt" editable="false" layoutX="15.0" layoutY="301.0" prefHeight="25.0" prefWidth="42.0" promptText="id" />
+      <Label layoutX="20.0" layoutY="286.0" />
+      <TextField fx:id="alwaysAtHomeTxt" layoutX="256.0" layoutY="304.0" prefHeight="25.0" prefWidth="74.0" promptText="Antal alltid hemma" />
+      <Label layoutX="258.0" layoutY="288.0" prefHeight="17.0" prefWidth="74.0" text="Alltid hemma" wrapText="true" />
+      <TextField fx:id="numberOfUnitsTxt" layoutX="201.0" layoutY="304.0" prefHeight="25.0" prefWidth="45.0" promptText="Antal" />
+      <Label layoutX="201.0" layoutY="288.0" prefHeight="17.0" prefWidth="42.0" text="Antal" wrapText="true" />
+      <TextField fx:id="storageplaceKeyTxt" layoutX="548.0" layoutY="262.0" prefHeight="25.0" prefWidth="45.0" promptText="Förvaringsid" visible="false" />
+      <TextField fx:id="availableTxt" layoutX="469.0" layoutY="265.0" prefHeight="25.0" prefWidth="35.0" promptText="Finns?" />
+      <Label layoutX="471.0" layoutY="249.0" prefHeight="17.0" prefWidth="42.0" text="Finns?" wrapText="true" />
+      <TextField fx:id="storageplaceNameTxt" layoutX="65.0" layoutY="304.0" prefHeight="25.0" prefWidth="126.0" promptText="Plats" />
+      <Label layoutX="69.0" layoutY="288.0" text="Förvaringsplats" />
+      <ChoiceBox fx:id="categoryChoiceBox" layoutX="255.0" layoutY="265.0" onAction="#categorySelected" prefHeight="25.0" prefWidth="209.0" />
+      <Button fx:id="resetFieldsBtn" layoutX="342.0" layoutY="368.0" mnemonicParsing="false" onAction="#resetAllFields" prefHeight="25.0" prefWidth="86.0" text="Nollställ fält" wrapText="true" />
+   </children>
+</AnchorPane>
