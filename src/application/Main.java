@@ -82,7 +82,7 @@ public class Main extends Application {
             //Add all the views for the project here (name + location)
             viewcontroller.addScreen("StartView", FXMLLoader.load(getClass().getResource("/view/StartView.fxml")));
             viewcontroller.addScreen("HandleCategories", FXMLLoader.load(getClass().getResource("/view/HandleCategoriesView.fxml")));
-        //  viewcontroller.addScreen("HandleItems", FXMLLoader.load(getClass().getResource("/view/HandleItemsView.fxml")));
+            viewcontroller.addScreen("HandleItems", FXMLLoader.load(getClass().getResource("/view/HandleItemsView.fxml")));
         //  viewcontroller.addScreen("HandleStorage", FXMLLoader.load(getClass().getResource("/view/HandleStorageView.fxml")));
         //  viewcontroller.addScreen("ShoppingList", FXMLLoader.load(getClass().getResource("/view/ShoppingListView.fxml")));
             
