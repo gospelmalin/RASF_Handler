@@ -125,8 +125,14 @@ public class ItemRepository {
 				int storageplaceKey = Integer.parseInt(element.getElementsByTagName("storageplaceKey").item(0).getTextContent());
 				String storageplaceName = element.getElementsByTagName("storageplaceName").item(0).getTextContent(); 
 				int unitsAlways = Integer.parseInt(element.getElementsByTagName("unitsAlways").item(0).getTextContent()); 
-				Item item = new Item(itemKey, categoryKey, itemName, unitsAlways, available, numberOfUnits, categoryName, storageplaceKey, storageplaceName); // Create a Item object 
-				System.out.println("Printing an item: " + item); // call the Item object's toString-method and print 
+				
+				int numberToBuy = 0;
+				if (unitsAlways>0 && numberOfUnits<=unitsAlways) {
+					numberToBuy = unitsAlways - numberOfUnits;
+				}
+				Item item = new Item(itemKey, categoryKey, itemName, unitsAlways, available, numberOfUnits, categoryName, storageplaceKey, storageplaceName, numberToBuy); // Create an Item object 
+				
+				// System.out.println("Printing an item: " + item); // call the Item object's toString-method and print 
 				itemsList.add(item);
 			}
 		} catch (NumberFormatException e1) {
@@ -140,7 +146,7 @@ public class ItemRepository {
 		} catch (IOException e5) {
 			System.err.println("A IO exception occured: " + e5.getMessage());
 		} 
-		System.out.println("Done parsing item-xml!"); 
+	 // System.out.println("Done parsing item-xml!"); 
 		return itemsList;		
 	}
 
