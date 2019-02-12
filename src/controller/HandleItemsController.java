@@ -18,8 +18,10 @@ import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.MouseEvent;
 import model.Category;
 import model.Item;
+import model.Storageplace;
 import repository.CategoryRepository;
 import repository.ItemRepository;
+import repository.StorageplaceRepository;
 
 
 public class HandleItemsController {
@@ -105,9 +107,13 @@ public class HandleItemsController {
     private ChoiceBox<String> categoryChoiceBox;
     
     @FXML
+    private ChoiceBox<String> storageChoiceBox;
+    
+    @FXML
     private ChoiceBox<Integer> categoryKeyChoiceBox;
     
     HashMap<String, Integer> categoryWithId = new HashMap<>(); //Will store "categoryName" and "categoryKey"
+    HashMap<String, Integer> storageplaceWithId = new HashMap<>(); //Will store "storageplaceName" and "storageplaceKey"
     ArrayList<Item> itemsList;
     Item i;
     ItemRepository itemRepo = new ItemRepository();
@@ -137,6 +143,7 @@ public class HandleItemsController {
     	availableCol.setCellValueFactory(new PropertyValueFactory<Item, String>("available"));    	
     	updateTable();
     	updateListOfCategories();
+    	updateListOfStorageplaces();
 
     	 
     }
@@ -157,18 +164,26 @@ public class HandleItemsController {
      //  categoryKeyTxt.setText(String.valueOf(i.getCategoryKey()));
        alwaysAtHomeTxt.setText(String.valueOf(i.getUnitsAlways()));
        numberOfUnitsTxt.setText(String.valueOf(i.getNumberOfUnits()));
-       storageplaceKeyTxt.setText(String.valueOf(i.getStorageplaceKey()));
+     //  storageplaceKeyTxt.setText(String.valueOf(i.getStorageplaceKey()));
        availableTxt.setText(i.getAvailable());
        storageplaceNameTxt.setText(i.getStorageplaceName());
        
        
        categoryChoiceBox.setValue(i.getCategoryName()); //Set categorychoicebox to category name
        categoryKeyTxt.setText(String.valueOf(categoryWithId.get(categoryChoiceBox.getValue()))); //Konvertera detta till en String.
+    
+       storageChoiceBox.setValue(i.getStorageplaceName()); //Set storagechoicebox to storageplace name
+       storageplaceKeyTxt.setText(String.valueOf(storageplaceWithId.get(storageChoiceBox.getValue()))); //Konvertera detta till en String.
     }
     
     @FXML
     void categorySelected(ActionEvent event) {
     	categoryKeyTxt.setText(String.valueOf(categoryWithId.get(categoryChoiceBox.getValue()))); //Konvertera detta till en String.
+    }
+    
+    @FXML
+    void storageSelected(ActionEvent event) {
+    	storageplaceKeyTxt.setText(String.valueOf(storageplaceWithId.get(storageChoiceBox.getValue()))); //Konvertera detta till en String.
     }
     
  
@@ -205,6 +220,26 @@ public class HandleItemsController {
 	@FXML
 	void addItem(ActionEvent event) {
 		System.out.println("addItem called");
+    	String message = null;
+        //Text fields cannot be empty
+        if(!(itemNameTxt.getText().length() > 0)) {
+        	message = "Ange namn innan du försöker lägga till en matvara.";
+        	messageTextArea.setText(message);
+            return;
+        }
+        // New item instance			
+		Item i1 = new Item();
+		//i1.setItemKey(Integer.parseInt(itemKeyTxt.getText()));
+		i1.setCategoryKey(Integer.parseInt(categoryKeyTxt.getText()));
+		i1.setItemName(itemNameTxt.getText());
+		i1.setUnitsAlways(Integer.parseInt(alwaysAtHomeTxt.getText()));
+		i1.setAvailable(availableTxt.getText());
+		i1.setNumberOfUnits(Integer.parseInt(numberOfUnitsTxt.getText()));
+		i1.setStorageplaceKey(Integer.parseInt(storageplaceKeyTxt.getText()));
+		message = itemRepo.add(i1); //TODO
+        messageTextArea.setText(message); //TODO
+        //update table
+        updateTable();
 		//TODO
 	}
 	 
@@ -237,18 +272,35 @@ public class HandleItemsController {
 
     }
     
+    private void updateListOfStorageplaces() {
+
+        //get repository
+        StorageplaceRepository sr = new StorageplaceRepository();
+        ArrayList<Storageplace> storageplaceArray = sr.getAllStorageplaces();
+
+        //We loop through every storageplace name in the storageplace hashmap array.
+        for(Storageplace storageplace : storageplaceArray) {
+            storageplaceWithId.put(storageplace.getStorageplaceName(), storageplace.getStorageplaceKey());
+        }
+
+        // To set the items in the choice box:
+        ObservableList<String> availableStorageplaces = FXCollections.observableArrayList(storageplaceWithId.keySet());
+        storageChoiceBox.setItems(availableStorageplaces);
+
+    }
+    
     
     @FXML
     void resetAllFields(ActionEvent event) {
     	itemKeyTxt.setText("");
         itemNameTxt.setText("");
-        categoryNameTxt.setText(""); //TODO to be deleted?
-        categoryKeyTxt.setText("");
+      //  categoryNameTxt.setText(""); //TODO to be deleted?
+       // categoryKeyTxt.setText("");
         alwaysAtHomeTxt.setText("");
         numberOfUnitsTxt.setText("");
-        storageplaceKeyTxt.setText("");
+       // storageplaceKeyTxt.setText("");
         availableTxt.setText("");
-        storageplaceNameTxt.setText("");
+      //  storageplaceNameTxt.setText(""); //TODO to be deleted?
     }
 	   
     
