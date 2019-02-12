@@ -210,7 +210,29 @@ public class RESTClient {
 	    return returnMessage;
 	}
 
-	//TODO update
+	/**
+	 * Call API to update item.
+	 *
+	 * @param item the Item
+	 * @return the string
+	 */
+	protected String updateItem(Item item) {
+		Form form = new Form();
+	   form.param("itemKey", Integer.toString(item.getItemKey()));
+	    form.param("itemName", item.getItemName());
+	    RESTClient rc = new RESTClient();
+	    String callResult = rc.client
+	       .target(REST_SERVICE_URL_IT)
+	       .path("/{itemKey}")
+	       .resolveTemplate("itemKey", Integer.toString(item.getItemKey()))
+	       .request(MediaType.APPLICATION_XML)
+	       .put(Entity.entity(form,
+	          MediaType.APPLICATION_FORM_URLENCODED_TYPE),
+	          String.class);
+	    String returnMessage = "Update item request returned: \n" + callResult;
+	    System.out.println(returnMessage);	    
+	return returnMessage;
+	}
 	
 	/**
 	 * Call API to delete item.
@@ -218,6 +240,8 @@ public class RESTClient {
 	 * @param item the Item
 	 * @return the string returnMessage
 	 */
+	// MEthod not allowed - removed
+	/*
 	protected String deleteItem(Item item) {
 	 RESTClient rc = new RESTClient();
 	 String callResult = rc.client
@@ -230,7 +254,7 @@ public class RESTClient {
 	 System.out.println(returnMessage);	
 	return returnMessage;
 	}
-	
+	*/
 	
 	
 	// STORAGEPLACES QUERIES
