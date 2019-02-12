@@ -1,5 +1,6 @@
 package repository;
 
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -9,6 +10,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import model.Category;
+import model.Item;
 import model.Storageplace;
 
 
@@ -180,8 +182,56 @@ public class RESTClient {
 		return s;
 	}
 	
+	/**
+	 * Call API to add item.
+	 *
+	 * @param item the Item
+	 * @return the string
+	 */
+	protected String addItem(Item item) {
+		Form form = new Form();
+	    form.param("categoryKey", Integer.toString(item.getCategoryKey()));
+	    form.param("itemName",item.getItemName());
+	    form.param("unitsAlways", Integer.toString(item.getUnitsAlways())); 
+	    form.param("available",item.getAvailable()); 
+	    form.param("numberOfUnits", Integer.toString(item.getNumberOfUnits()));
+	    form.param("storageplaceKey", Integer.toString(item.getStorageplaceKey()));
+
+	    System.out.println("this is itemName param: " + item.getItemName()); //TODO TEMP
+	    RESTClient rc = new RESTClient();
+	    String callResult = rc.client
+	       .target(REST_SERVICE_URL_IT)
+	       .request(MediaType.APPLICATION_XML)
+	       .post(Entity.entity(form,
+	          MediaType.APPLICATION_FORM_URLENCODED_TYPE),
+	          String.class);
+	    String returnMessage = "Add item request returned: \n" + callResult;		
+	    System.out.println(returnMessage);
+	    return returnMessage;
+	}
+
+	//TODO update
 	
-	//TODO
+	/**
+	 * Call API to delete item.
+	 *
+	 * @param item the Item
+	 * @return the string returnMessage
+	 */
+	protected String deleteItem(Item item) {
+	 RESTClient rc = new RESTClient();
+	 String callResult = rc.client
+	         .target(REST_SERVICE_URL_IT)
+	         .path("/{itemKey}")
+	         .resolveTemplate("itemKey", Integer.toString(item.getItemKey()))
+	         .request(MediaType.APPLICATION_XML)
+	         .delete(String.class);
+	 String returnMessage = "Delete item request returned: \n" + callResult;
+	 System.out.println(returnMessage);	
+	return returnMessage;
+	}
+	
+	
 	
 	// STORAGEPLACES QUERIES
 	
