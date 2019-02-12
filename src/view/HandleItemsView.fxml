@@ -48,18 +48,19 @@
       <Button fx:id="homeBtn" layoutX="545.0" layoutY="15.0" mnemonicParsing="false" onAction="#openStartView" text="Hem" />
       <TextField fx:id="categoryNameTxt" layoutX="255.0" layoutY="28.0" prefHeight="25.0" prefWidth="209.0" promptText="Kategori" />
       <Label layoutX="255.0" layoutY="249.0" text="Kategori" />
-      <TextField fx:id="categoryKeyTxt" editable="false" layoutX="15.0" layoutY="301.0" prefHeight="25.0" prefWidth="42.0" promptText="id" />
+      <TextField fx:id="categoryKeyTxt" editable="false" layoutX="7.0" layoutY="302.0" prefHeight="25.0" prefWidth="42.0" promptText="id" visible="false" />
       <Label layoutX="20.0" layoutY="286.0" />
       <TextField fx:id="alwaysAtHomeTxt" layoutX="256.0" layoutY="304.0" prefHeight="25.0" prefWidth="74.0" promptText="Antal alltid hemma" />
       <Label layoutX="258.0" layoutY="288.0" prefHeight="17.0" prefWidth="74.0" text="Alltid hemma" wrapText="true" />
       <TextField fx:id="numberOfUnitsTxt" layoutX="201.0" layoutY="304.0" prefHeight="25.0" prefWidth="45.0" promptText="Antal" />
       <Label layoutX="201.0" layoutY="288.0" prefHeight="17.0" prefWidth="42.0" text="Antal" wrapText="true" />
-      <TextField fx:id="storageplaceKeyTxt" layoutX="548.0" layoutY="262.0" prefHeight="25.0" prefWidth="45.0" promptText="Förvaringsid" visible="false" />
+      <TextField fx:id="storageplaceKeyTxt" layoutX="537.0" layoutY="301.0" prefHeight="25.0" prefWidth="56.0" promptText="Förvaringsid" />
       <TextField fx:id="availableTxt" layoutX="469.0" layoutY="265.0" prefHeight="25.0" prefWidth="35.0" promptText="Finns?" />
       <Label layoutX="471.0" layoutY="249.0" prefHeight="17.0" prefWidth="42.0" text="Finns?" wrapText="true" />
-      <TextField fx:id="storageplaceNameTxt" layoutX="65.0" layoutY="304.0" prefHeight="25.0" prefWidth="126.0" promptText="Plats" />
+      <TextField fx:id="storageplaceNameTxt" layoutX="215.0" layoutY="3.0" prefHeight="25.0" prefWidth="126.0" promptText="Plats" />
       <Label layoutX="69.0" layoutY="288.0" text="Förvaringsplats" />
       <ChoiceBox fx:id="categoryChoiceBox" layoutX="255.0" layoutY="265.0" onAction="#categorySelected" prefHeight="25.0" prefWidth="209.0" />
       <Button fx:id="resetFieldsBtn" layoutX="342.0" layoutY="368.0" mnemonicParsing="false" onAction="#resetAllFields" prefHeight="25.0" prefWidth="86.0" text="Nollställ fält" wrapText="true" />
+      <ChoiceBox fx:id="storageChoiceBox" layoutX="57.0" layoutY="304.0" onAction="#storageSelected" prefHeight="25.0" prefWidth="134.0" />
    </children>
 </AnchorPane>
