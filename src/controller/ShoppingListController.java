@@ -81,17 +81,15 @@ public class ShoppingListController {
 	    @FXML
 	    private TextField numberToBuyTxt;
 
-
-	    @FXML
-	    private TextArea messageTextArea;
 	    
 	    @FXML
-	    private Button resetFieldsBtn;
+	    private Button refreshShoppingListBtn;
 	    
 	    @FXML
 	    private Button homeBtn;
 	    
 	    ArrayList<Item> itemsList;
+	    ArrayList<Item> itemsToBuyList;
 	    Item i;
 	    ItemRepository itemRepo = new ItemRepository();
 	
@@ -150,8 +148,11 @@ public class ShoppingListController {
    		private void updateTable() {
    	    	itemsList = new ArrayList<Item>();
    	    	itemsList = itemRepo.getAllItems();
-   			ObservableList<Item> list = FXCollections.observableArrayList(itemsList);
+   	    	//select appropriate items for shoppingList
+   	    	itemsToBuyList = createShoppingList(itemsList);
+   			ObservableList<Item> list = FXCollections.observableArrayList(itemsToBuyList);
    			itemTable.setItems((ObservableList<Item>) list);
+   			itemTable.refresh(); //TODO check if it helps
    		}
    		
    		@FXML
@@ -159,6 +160,12 @@ public class ShoppingListController {
    	    	//System.out.println("Start view should open");
    	    	ViewController.activate("StartView");
    	    }
+   		
+   	  @FXML
+      void refreshShoppingList(ActionEvent event) {
+   		updateTable();
+   		itemTable.refresh();
+      }
    		
    	 @FXML
      void resetAllFields(ActionEvent event) {
@@ -173,5 +180,15 @@ public class ShoppingListController {
          storageplaceNameTxt.setText("");
          numberToBuyTxt.setText("");
      }
+   	 
+   	 private ArrayList<Item> createShoppingList(ArrayList<Item> itemsList) {
+   		 ArrayList<Item> itemsToBuyList = new ArrayList<Item>();
+   		 for (Item item : itemsList) {
+   			 if (item.getNumberToBuy()>0) {
+   				 itemsToBuyList.add(item);
+   			 }
+   		 }
+   		 return itemsToBuyList;
+   	 }
     	
 }
