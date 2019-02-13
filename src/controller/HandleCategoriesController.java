@@ -145,6 +145,7 @@ public class HandleCategoriesController {
         messageTextArea.setText(message); //TODO
         //update table
         updateTable();
+        categoryTable.refresh();
     }
     
     @FXML
@@ -168,6 +169,7 @@ public class HandleCategoriesController {
     	message = categoryRepo.update(c1);
         messageTextArea.setText(message);
     	updateTable();
+    	categoryTable.refresh();
     }
     
     
