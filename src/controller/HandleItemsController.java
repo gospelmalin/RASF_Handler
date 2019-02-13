@@ -156,8 +156,11 @@ public class HandleItemsController {
      */
     @FXML
     private void TableClicked(MouseEvent event) {
-       i = itemTable.getSelectionModel().getSelectedItem();
-       
+    	if (itemTable.getSelectionModel().getSelectedItem()== null) {
+    		return;
+    	}
+    	else {
+       i = itemTable.getSelectionModel().getSelectedItem();      
        itemKeyTxt.setText(String.valueOf(i.getItemKey())); // Convert to String.
        itemNameTxt.setText(i.getItemName());
        categoryNameTxt.setText(i.getCategoryName());
@@ -174,6 +177,7 @@ public class HandleItemsController {
     
        storageChoiceBox.setValue(i.getStorageplaceName()); //Set storagechoicebox to storageplace name
        storageplaceKeyTxt.setText(String.valueOf(storageplaceWithId.get(storageChoiceBox.getValue()))); //Konvertera detta till en String.
+    	}
     }
     
     @FXML
@@ -227,6 +231,42 @@ public class HandleItemsController {
         	messageTextArea.setText(message);
             return;
         }
+        if(!(categoryKeyTxt.getText().length() > 0)) {
+        	message = "Kategori-id saknas. Välj kategori i dropdown-listan för den matvara som ska läggas till.";
+        	messageTextArea.setText(message);
+            return;
+        }
+    	if(!(alwaysAtHomeTxt.getText().length() > 0)) {
+        	message = "Antal alltid hemma saknas. Ange hur många förpackningar av matvaran som alltid ska finnas hemma.";
+        	messageTextArea.setText(message);
+            return;
+        }
+    	if(!(numberOfUnitsTxt.getText().length() > 0)) {
+        	message = "Antal förpackningar saknas. Ange hur många förpackningar som finns av matvaran efter uppdatering.";
+        	messageTextArea.setText(message);
+            return;
+        }
+    	if(!(storageplaceKeyTxt.getText().length() > 0)) {
+        	message = "Förpackningsid saknas. Välj förvaringsplats för matvaran i dropdown-listan";
+        	messageTextArea.setText(message);
+            return;
+        }
+    	if(!(availableTxt.getText().length() > 0)) {
+    		if(Integer.parseInt(numberOfUnitsTxt.getText())>0) {
+    			availableTxt.setText("YES");
+    		}
+    		else {
+    			availableTxt.setText("NO");
+    		}
+        }
+    	//available must have appropriate values
+    	if(Integer.parseInt(numberOfUnitsTxt.getText())>0) {
+			availableTxt.setText("YES");
+		}
+		else {
+			availableTxt.setText("NO");
+		}
+    	
         // New item instance			
 		Item i1 = new Item();
 		//i1.setItemKey(Integer.parseInt(itemKeyTxt.getText()));
@@ -240,6 +280,7 @@ public class HandleItemsController {
         messageTextArea.setText(message); //TODO
         //update table
         updateTable();
+        resetFields(); // empty text fields
 		//TODO
 	}
 	 
@@ -287,6 +328,13 @@ public class HandleItemsController {
     			availableTxt.setText("NO");
     		}
         }
+    	//available must have appropriate values
+    	if(Integer.parseInt(numberOfUnitsTxt.getText())>0) {
+			availableTxt.setText("YES");
+		}
+		else {
+			availableTxt.setText("NO");
+		}
     	i1.setItemKey(Integer.parseInt(itemKeyTxt.getText()));
     	i1.setCategoryKey(Integer.parseInt(categoryKeyTxt.getText()));
 		i1.setItemName(itemNameTxt.getText());
@@ -296,6 +344,7 @@ public class HandleItemsController {
 		i1.setStorageplaceKey(Integer.parseInt(storageplaceKeyTxt.getText()));
     	message = itemRepo.update(i1);
         messageTextArea.setText(message);
+        resetFields(); // Empty input text fields
     	updateTable();
 	}
 	
@@ -341,6 +390,10 @@ public class HandleItemsController {
     
     @FXML
     void resetAllFields(ActionEvent event) {
+    	resetFields();
+    }
+	   
+    private void resetFields() {
     	itemKeyTxt.setText("");
         itemNameTxt.setText("");
       //  categoryNameTxt.setText(""); //TODO to be deleted?
@@ -351,7 +404,5 @@ public class HandleItemsController {
         availableTxt.setText("");
       //  storageplaceNameTxt.setText(""); //TODO to be deleted?
     }
-	   
-    
     
 }
