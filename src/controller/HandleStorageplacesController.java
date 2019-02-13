@@ -146,7 +146,7 @@ public class HandleStorageplacesController {
 	        messageTextArea.setText(message); //TODO
 	        //update table
 	        updateTable();
-
+	        storageplaceTable.refresh();
 	    }
 	    
 	    @FXML
@@ -171,7 +171,7 @@ public class HandleStorageplacesController {
 	    	message = storageplaceRepo.update(sto1);
 	        messageTextArea.setText(message);
 	    	updateTable();
-	    	
+	    	storageplaceTable.refresh();
 	    }
 	    
 	    
