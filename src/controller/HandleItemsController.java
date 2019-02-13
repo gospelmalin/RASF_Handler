@@ -14,7 +14,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.MouseEvent;
 import model.Category;
 import model.Item;
@@ -102,6 +101,7 @@ public class HandleItemsController {
     
     @FXML
     private Button resetFieldsBtn;
+   
     
     @FXML
     private ChoiceBox<String> categoryChoiceBox;
@@ -159,22 +159,22 @@ public class HandleItemsController {
     	if (itemTable.getSelectionModel().getSelectedItem()== null) {
     		return;
     	}
-    	else {
+   	else {
        i = itemTable.getSelectionModel().getSelectedItem();      
        itemKeyTxt.setText(String.valueOf(i.getItemKey())); // Convert to String.
        itemNameTxt.setText(i.getItemName());
-       categoryNameTxt.setText(i.getCategoryName());
+   //    categoryNameTxt.setText(i.getCategoryName()); //TODO TESTAR
      //  categoryKeyTxt.setText(String.valueOf(i.getCategoryKey()));
        alwaysAtHomeTxt.setText(String.valueOf(i.getUnitsAlways()));
        numberOfUnitsTxt.setText(String.valueOf(i.getNumberOfUnits()));
      //  storageplaceKeyTxt.setText(String.valueOf(i.getStorageplaceKey()));
        availableTxt.setText(i.getAvailable());
-       storageplaceNameTxt.setText(i.getStorageplaceName());
+    //   storageplaceNameTxt.setText(i.getStorageplaceName()); //TODO TESTAR
        
        
        categoryChoiceBox.setValue(i.getCategoryName()); //Set categorychoicebox to category name
        categoryKeyTxt.setText(String.valueOf(categoryWithId.get(categoryChoiceBox.getValue()))); //Konvertera detta till en String.
-    
+
        storageChoiceBox.setValue(i.getStorageplaceName()); //Set storagechoicebox to storageplace name
        storageplaceKeyTxt.setText(String.valueOf(storageplaceWithId.get(storageChoiceBox.getValue()))); //Konvertera detta till en String.
     	}
@@ -280,6 +280,7 @@ public class HandleItemsController {
         messageTextArea.setText(message); //TODO
         //update table
         updateTable();
+        itemTable.refresh();
         resetFields(); // empty text fields
 		//TODO
 	}
@@ -287,7 +288,7 @@ public class HandleItemsController {
 	@FXML
 	void updateItem(ActionEvent event) {
 		System.out.println("updateItem called");
-		Item i1 = new Item();
+		//Item i1 = new Item();
     	String message = null;
     	//Text fields should not be empty
     	if(!(categoryKeyTxt.getText().length() > 0)) {
@@ -335,17 +336,18 @@ public class HandleItemsController {
 		else {
 			availableTxt.setText("NO");
 		}
-    	i1.setItemKey(Integer.parseInt(itemKeyTxt.getText()));
-    	i1.setCategoryKey(Integer.parseInt(categoryKeyTxt.getText()));
-		i1.setItemName(itemNameTxt.getText());
-		i1.setUnitsAlways(Integer.parseInt(alwaysAtHomeTxt.getText()));
-		i1.setAvailable(availableTxt.getText());
-		i1.setNumberOfUnits(Integer.parseInt(numberOfUnitsTxt.getText()));
-		i1.setStorageplaceKey(Integer.parseInt(storageplaceKeyTxt.getText()));
-    	message = itemRepo.update(i1);
+    	i.setItemKey(Integer.parseInt(itemKeyTxt.getText()));
+    	i.setCategoryKey(Integer.parseInt(categoryKeyTxt.getText()));
+		i.setItemName(itemNameTxt.getText());
+		i.setUnitsAlways(Integer.parseInt(alwaysAtHomeTxt.getText()));
+		i.setAvailable(availableTxt.getText());
+		i.setNumberOfUnits(Integer.parseInt(numberOfUnitsTxt.getText()));
+		i.setStorageplaceKey(Integer.parseInt(storageplaceKeyTxt.getText()));
+    	message = itemRepo.update(i);
         messageTextArea.setText(message);
         resetFields(); // Empty input text fields
     	updateTable();
+    	itemTable.refresh();
 	}
 	
     @FXML
