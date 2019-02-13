@@ -80,14 +80,12 @@ public class ItemRepository {
 	 *
 	 * @return string message
 	 */
-	//TODO
-	/*
 	public String update(Item i1) {
 		RESTClient rc = new RESTClient();
 		String message = rc.updateItem(i1);
 		return message;	
 	}
-	*/
+
 	
 	/**
 	 * Delete item call to the client.
