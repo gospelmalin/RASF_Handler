@@ -218,7 +218,38 @@ public class HandleItemsController {
     @FXML
     void showSelectedItem(ActionEvent event) {
     	System.out.println("showSelectedItem called");
-		//TODO
+    	String message = null;
+    	//Text fields should not be empty
+    	 if(!(itemKeyTxt.getText().length() > 0)) {
+            	message = "Id saknas. Välj matvara i tabellen och klicka på Visa matvara.";
+            	messageTextArea.setText(message);
+                return;
+        }
+    	int itemKeySelection = Integer.parseInt(itemKeyTxt.getText());
+    	Item item = new Item();
+    	item = itemRepo.getSelectedItem(itemKeySelection);
+    	int itemKey = item.getItemKey();
+    	String itemName = item.getItemName();
+    	int numberOfUnits = item.getNumberOfUnits();
+    	int unitsAlways = item.getUnitsAlways();
+    	int categoryKey = item.getCategoryKey();
+    	String categoryName = item.getCategoryName();
+    	String available = item.getAvailable();
+    	int storageplaceKey = item.getStorageplaceKey();
+    	String storageplaceName = item.getStorageplaceName();
+    	int numberToBuy = item.getNumberToBuy();
+    	
+    	messageTextArea.setText("Vald matvara: \n");
+    	messageTextArea.appendText("Id: " + itemKey + "\n");
+    	messageTextArea.appendText("Namn: " + itemName + "\n");  
+    	messageTextArea.appendText("Antal: " + numberOfUnits + "\n");
+    	messageTextArea.appendText("Antal alltid hemma: " + unitsAlways + "\n");
+    	messageTextArea.appendText("Finns hemma: " + available + "\n");
+    	messageTextArea.appendText("Kategori id: " + categoryKey + "\n");
+    	messageTextArea.appendText("Kategori: " + categoryName + "\n");
+    	messageTextArea.appendText("Förvaringsid: " + storageplaceKey + "\n");
+    	messageTextArea.appendText("Förvaringsplats: " + storageplaceName + "\n"); 	
+    	messageTextArea.appendText("Antal att köpa: " + numberToBuy + "\n");
     }
 	
 	@FXML
