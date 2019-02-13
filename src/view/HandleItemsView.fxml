@@ -10,14 +10,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.HandleItemsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: lightblue;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.HandleItemsController">
    <children>
       <Label layoutX="20.0" layoutY="5.0" prefHeight="37.0" prefWidth="494.0" text="Matvaror">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="20.0" layoutY="28.0" prefHeight="37.0" prefWidth="494.0" text="Lägg till, uppdatera, ta bort">
+      <Label layoutX="20.0" layoutY="28.0" prefHeight="37.0" prefWidth="494.0" text="Lägg till, uppdatera">
          <font>
             <Font size="14.0" />
          </font>
@@ -60,5 +60,6 @@
       <ChoiceBox fx:id="categoryChoiceBox" layoutX="255.0" layoutY="265.0" onAction="#categorySelected" prefHeight="25.0" prefWidth="209.0" />
       <Button fx:id="resetFieldsBtn" layoutX="342.0" layoutY="368.0" mnemonicParsing="false" onAction="#resetAllFields" prefHeight="25.0" prefWidth="86.0" text="Nollställ fält" wrapText="true" />
       <ChoiceBox fx:id="storageChoiceBox" layoutX="57.0" layoutY="304.0" onAction="#storageSelected" prefHeight="25.0" prefWidth="134.0" />
+      <Button fx:id="openShoppingListBtn" layoutX="506.0" layoutY="345.0" mnemonicParsing="false" onAction="#openShoppingList" prefHeight="46.0" prefWidth="86.0" text="Öppna inköpslistan" textAlignment="CENTER" wrapText="true" />
    </children>
 </AnchorPane>

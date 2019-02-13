@@ -101,6 +101,9 @@ public class HandleItemsController {
     
     @FXML
     private Button resetFieldsBtn;
+    
+    @FXML
+    private Button openShoppingListBtn;
    
     
     @FXML
@@ -208,6 +211,12 @@ public class HandleItemsController {
     void openStartView(ActionEvent event) {
     	//System.out.println("Start view should open");
     	ViewController.activate("StartView");
+    }
+	
+	@FXML
+    void openShoppingList(ActionEvent event) {
+    	ViewController.activate("ShoppingList");
+    	System.out.println("ShoppingListView should be shown.");
     }
 	
 	void showAllItems() {

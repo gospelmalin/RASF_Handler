@@ -4,25 +4,24 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ShoppingListController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: lightblue;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ShoppingListController">
    <children>
       <Label layoutX="20.0" layoutY="5.0" prefHeight="37.0" prefWidth="494.0" text="Inköpslista">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <TableView fx:id="itemTable" layoutX="5.0" layoutY="60.0" prefHeight="186.0" prefWidth="592.0">
+      <TableView fx:id="itemTable" layoutX="17.0" layoutY="83.0" prefHeight="227.0" prefWidth="543.0">
         <columns>
+            <TableColumn fx:id="numberToBuyCol" editable="false" minWidth="0.0" prefWidth="88.0" text="Antal att köpa" />
           <TableColumn fx:id="itemKeyCol" editable="false" prefWidth="38.333343505859375" text="Id" visible="false" />
             <TableColumn fx:id="categoryKeyCol" prefWidth="46.666656494140625" text="Kategori id" visible="false" />
-            <TableColumn fx:id="categoryNameCol" prefWidth="155.0" text="Kategori" />
-          <TableColumn fx:id="itemNameCol" prefWidth="270.0" text="Matvara" />
-            <TableColumn fx:id="numberToBuyCol" editable="false" minWidth="0.0" prefWidth="96.0" text="Antal att köpa" />
+          <TableColumn fx:id="itemNameCol" prefWidth="271.0" text="Matvara" />
+            <TableColumn fx:id="categoryNameCol" prefWidth="162.33331298828125" text="Kategori" />
             <TableColumn fx:id="numberOfUnitsCol" editable="false" minWidth="0.0" prefWidth="7.0" text="Antal kvar" />
             <TableColumn fx:id="storageplaceNameCol" editable="false" minWidth="0.0" prefWidth="0.0" text="Plats" visible="false" />
             <TableColumn fx:id="availableCol" editable="false" minWidth="0.0" prefWidth="0.0" text="Finns?" visible="false" />
@@ -30,28 +29,26 @@
             <TableColumn fx:id="storageplaceKeyCol" minWidth="5.33331298828125" prefWidth="5.33331298828125" text="Platsid" visible="false" />
         </columns>
       </TableView>
-      <TextField fx:id="itemKeyTxt" editable="false" layoutX="6.0" layoutY="264.0" prefHeight="25.0" prefWidth="42.0" promptText="id" />
-      <TextField fx:id="itemNameTxt" layoutX="55.0" layoutY="265.0" prefHeight="25.0" prefWidth="194.0" promptText="Namn" />
-      <Label layoutX="11.0" layoutY="249.0" text="Id" />
-      <Label layoutX="59.0" layoutY="249.0" text="Matvarunamn" />
-      <TextArea fx:id="messageTextArea" editable="false" layoutX="16.0" layoutY="340.0" prefHeight="55.0" prefWidth="318.0" wrapText="true" />
-      <Label layoutX="16.0" layoutY="325.0" text="Meddelande" />
+      <TextField fx:id="itemKeyTxt" editable="false" layoutX="6.0" layoutY="329.0" prefHeight="25.0" prefWidth="42.0" promptText="id" />
+      <TextField fx:id="itemNameTxt" editable="false" layoutX="55.0" layoutY="330.0" prefHeight="25.0" prefWidth="194.0" promptText="Namn" />
+      <Label layoutX="11.0" layoutY="314.0" text="Id" />
+      <Label layoutX="59.0" layoutY="314.0" text="Matvarunamn" />
       <Button fx:id="homeBtn" layoutX="545.0" layoutY="15.0" mnemonicParsing="false" onAction="#openStartView" text="Hem" />
-      <TextField fx:id="categoryNameTxt" layoutX="255.0" layoutY="264.0" prefHeight="25.0" prefWidth="209.0" promptText="Kategori" />
-      <Label layoutX="255.0" layoutY="249.0" text="Kategori" />
-      <TextField fx:id="categoryKeyTxt" editable="false" layoutX="15.0" layoutY="301.0" prefHeight="25.0" prefWidth="42.0" promptText="id" />
+      <TextField fx:id="categoryNameTxt" editable="false" layoutX="255.0" layoutY="329.0" prefHeight="25.0" prefWidth="209.0" promptText="Kategori" />
+      <Label layoutX="255.0" layoutY="314.0" text="Kategori" />
+      <TextField fx:id="categoryKeyTxt" editable="false" layoutX="545.0" layoutY="368.0" prefHeight="25.0" prefWidth="42.0" promptText="id" visible="false" />
       <Label layoutX="20.0" layoutY="286.0" />
-      <TextField fx:id="alwaysAtHomeTxt" layoutX="256.0" layoutY="304.0" prefHeight="25.0" prefWidth="74.0" promptText="Antal alltid hemma" />
-      <Label layoutX="258.0" layoutY="288.0" prefHeight="17.0" prefWidth="74.0" text="Alltid hemma" wrapText="true" />
-      <TextField fx:id="numberOfUnitsTxt" layoutX="201.0" layoutY="304.0" prefHeight="25.0" prefWidth="45.0" promptText="Antal" />
-      <Label layoutX="201.0" layoutY="288.0" prefHeight="17.0" prefWidth="42.0" text="Antal" wrapText="true" />
+      <TextField fx:id="alwaysAtHomeTxt" editable="false" layoutX="463.0" layoutY="370.0" prefHeight="25.0" prefWidth="74.0" promptText="Antal alltid hemma" />
+      <Label layoutX="465.0" layoutY="354.0" prefHeight="17.0" prefWidth="74.0" text="Alltid hemma" wrapText="true" />
+      <TextField fx:id="numberOfUnitsTxt" editable="false" layoutX="410.0" layoutY="370.0" prefHeight="25.0" prefWidth="45.0" promptText="Antal" />
+      <Label layoutX="410.0" layoutY="354.0" prefHeight="17.0" prefWidth="42.0" text="Antal" wrapText="true" />
       <TextField fx:id="storageplaceKeyTxt" layoutX="548.0" layoutY="262.0" prefHeight="25.0" prefWidth="45.0" promptText="Förvaringsid" visible="false" />
-      <TextField fx:id="availableTxt" layoutX="469.0" layoutY="265.0" prefHeight="25.0" prefWidth="35.0" promptText="Finns?" />
-      <Label layoutX="471.0" layoutY="249.0" prefHeight="17.0" prefWidth="42.0" text="Finns?" wrapText="true" />
-      <TextField fx:id="storageplaceNameTxt" layoutX="65.0" layoutY="304.0" prefHeight="25.0" prefWidth="126.0" promptText="Plats" />
-      <Label layoutX="69.0" layoutY="288.0" text="Förvaringsplats" />
-      <Button fx:id="resetFieldsBtn" layoutX="342.0" layoutY="368.0" mnemonicParsing="false" onAction="#resetAllFields" prefHeight="25.0" prefWidth="86.0" text="Nollställ fält" wrapText="true" />
-      <TextField fx:id="numberToBuyTxt" layoutX="339.0" layoutY="304.0" prefHeight="25.0" prefWidth="45.0" promptText="Antal" />
-      <Label layoutX="339.0" layoutY="288.0" prefHeight="17.0" prefWidth="55.0" text="Att köpa" wrapText="true" />
+      <TextField fx:id="availableTxt" editable="false" layoutX="365.0" layoutY="371.0" prefHeight="25.0" prefWidth="35.0" promptText="Finns?" />
+      <Label layoutX="367.0" layoutY="355.0" prefHeight="17.0" prefWidth="42.0" text="Finns?" wrapText="true" />
+      <TextField fx:id="storageplaceNameTxt" editable="false" layoutX="469.0" layoutY="329.0" prefHeight="25.0" prefWidth="126.0" promptText="Plats" />
+      <Label layoutX="473.0" layoutY="313.0" text="Förvaringsplats" />
+      <Button fx:id="refreshShoppingListBtn" layoutX="201.0" layoutY="31.0" mnemonicParsing="false" onAction="#refreshShoppingList" prefHeight="46.0" prefWidth="149.0" text="Uppdatera inköpslistan" wrapText="true" />
+      <TextField fx:id="numberToBuyTxt" editable="false" layoutX="545.0" layoutY="370.0" prefHeight="25.0" prefWidth="45.0" promptText="Antal" />
+      <Label layoutX="546.0" layoutY="354.0" prefHeight="17.0" prefWidth="55.0" text="Att köpa" wrapText="true" />
    </children>
 </AnchorPane>
