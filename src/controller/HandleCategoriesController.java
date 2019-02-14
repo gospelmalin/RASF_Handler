@@ -118,13 +118,21 @@ public class HandleCategoriesController {
                 return;
         }
     	int categoryKeySelection = Integer.parseInt(categoryKeyTxt.getText());
-    	Category category = new Category();
-    	category = categoryRepo.getSelectedCategory(categoryKeySelection);
-    	int categoryKey = category.getCategoryKey();
-    	String categoryName = category.getCategoryName();
-    	messageTextArea.setText("Vald kategori: \n");
-    	messageTextArea.appendText("Id: " + categoryKey + "\n");
-    	messageTextArea.appendText("Namn: " + categoryName + "\n");   	
+    	boolean categoryExists = checkCategoryExistance(categoryKeySelection);
+    	if (!categoryExists) {
+			message = "Det finns ingen kategori med det id:t. \nVälj kategori att visa från tabellen.";
+			messageTextArea.setText(message);
+            return;
+    	}
+		else {
+			Category category = new Category();
+			category = categoryRepo.getSelectedCategory(categoryKeySelection);
+			int categoryKey = category.getCategoryKey();
+			String categoryName = category.getCategoryName();
+			messageTextArea.setText("Vald kategori: \n");
+			messageTextArea.appendText("Id: " + categoryKey + "\n");
+			messageTextArea.appendText("Namn: " + categoryName + "\n");  
+		}
     }
 
     @FXML
@@ -177,12 +185,21 @@ public class HandleCategoriesController {
         	messageTextArea.setText(message);
             return;
         }
-    	c1.setCategoryKey(Integer.parseInt(categoryKeyTxt.getText()));
-		c1.setCategoryName(categoryNameTxt.getText().toUpperCase());
-    	message = categoryRepo.update(c1);
-        messageTextArea.setText(message);
-    	updateTable();
-    	categoryTable.refresh();
+    	int categoryKeySelection = Integer.parseInt(categoryKeyTxt.getText());
+    	boolean categoryExists = checkCategoryExistance(categoryKeySelection);
+    	if (!categoryExists) {
+			message = "Det finns ingen kategori med det id:t. \nVälj kategori för uppdatering i tabellen.";
+			messageTextArea.setText(message);
+            return;
+    	}
+		else {
+	    	c1.setCategoryKey(categoryKeySelection);
+			c1.setCategoryName(categoryNameTxt.getText().toUpperCase());
+	    	message = categoryRepo.update(c1);
+	        messageTextArea.setText(message);
+	    	updateTable();
+	    	categoryTable.refresh();
+		}
     }
     
     
@@ -192,18 +209,43 @@ public class HandleCategoriesController {
     	Category cat = new Category();
     	String message = null;
     	if(!(categoryKeyTxt.getText().length() > 0)) {
-        	message = "Fyll i id för den kategori som ska tas bort.";
+        	message = "Fyll i id för den kategori som ska tas bort, \neller välj kategori i tabellen.";
         	messageTextArea.setText(message);
             return;
         }
-    	cat.setCategoryKey(Integer.parseInt(categoryKeyTxt.getText()));
+    	int categoryKeySelection = Integer.parseInt(categoryKeyTxt.getText());
+    	boolean categoryExists = checkCategoryExistance(categoryKeySelection);
+    	if (!categoryExists) {
+			message = "Det finns ingen kategori med det id:t. \nVälj kategori i tabellen.";
+			messageTextArea.setText(message);
+            return;
+    	}
+		else {
+    	cat.setCategoryKey(categoryKeySelection);
     	cat.setCategoryName(categoryNameTxt.getText().toUpperCase());
         message = categoryRepo.delete(cat);
         messageTextArea.setText(message); //TODO
         //update table
         updateTable();
+		}
     }
 
- 
+    /**
+	 * The check user existance method.
+	 *
+	 * @param userId the user id
+	 * @return the boolean
+	 */
+	private boolean checkCategoryExistance(int catKey) {
+		ArrayList<Category> allCategories = categoryRepo.getAllCategories();
+		boolean categoryExists = false;
+		for (Category cat : allCategories) {
+			if (cat.getCategoryKey() == catKey) {
+				categoryExists = true;
+				break;
+			}
+		}
+		return categoryExists;
+	}
 
 }
