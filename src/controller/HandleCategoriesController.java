@@ -178,7 +178,7 @@ public class HandleCategoriesController {
             return;
         }
     	c1.setCategoryKey(Integer.parseInt(categoryKeyTxt.getText()));
-		c1.setCategoryName(categoryNameTxt.getText());
+		c1.setCategoryName(categoryNameTxt.getText().toUpperCase());
     	message = categoryRepo.update(c1);
         messageTextArea.setText(message);
     	updateTable();
@@ -197,7 +197,7 @@ public class HandleCategoriesController {
             return;
         }
     	cat.setCategoryKey(Integer.parseInt(categoryKeyTxt.getText()));
-    	cat.setCategoryName(categoryNameTxt.getText());
+    	cat.setCategoryName(categoryNameTxt.getText().toUpperCase());
         message = categoryRepo.delete(cat);
         messageTextArea.setText(message); //TODO
         //update table
