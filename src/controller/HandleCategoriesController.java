@@ -133,14 +133,27 @@ public class HandleCategoriesController {
     	String message = null;
         //Text fields cannot be empty
         if(!(categoryNameTxt.getText().length() > 0)) {
-        	message = "Enter name before trying to add a category.";
+        	message = "Ange namn innan du försöker lägga till en kategori.";
         	messageTextArea.setText(message);
             return;
+        }
+        // Want only one of each category name
+        String existingCategoryName = null;
+        categoriesList = new ArrayList<Category>();
+    	categoriesList = categoryRepo.getAllCategories();
+        for(Category cat : categoriesList) {
+        	existingCategoryName = cat.getCategoryName();
+        	if(categoryNameTxt.getText().equalsIgnoreCase(existingCategoryName)) {
+        		message = "Kategorin finns redan. Ange ett annat kategorinamn.";
+        		messageTextArea.setText(message);
+        		return;
+        	}
         }
         // New category instance			
 		Category c1 = new Category();
 		//c1.setCategoryKey(Integer.parseInt(categoryKeyTxt.getText()));
-		c1.setCategoryName(categoryNameTxt.getText());
+		// Categories should be uppercase
+		c1.setCategoryName(categoryNameTxt.getText().toUpperCase());
 		message = categoryRepo.add(c1); //TODO
         messageTextArea.setText(message); //TODO
         //update table
