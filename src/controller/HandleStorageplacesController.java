@@ -2,6 +2,7 @@ package controller;
 
 import java.util.ArrayList;
 
+import commonUtilities.CommonUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,6 +14,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import model.Category;
 import model.Storageplace;
 import repository.StorageplaceRepository;
 
@@ -112,19 +114,33 @@ public class HandleStorageplacesController {
 	    	System.out.println("showSelectedStorageplace called");
 	    	String message = null;
 	    	//Text fields should not be empty
-	    	 if(!(storageplaceKeyTxt.getText().length() > 0)) {
+	    	if(!(storageplaceKeyTxt.getText().length() > 0)) {
 	            	message = "Fyll i id för den förvaringsplats som ska visas.";
 	            	messageTextArea.setText(message);
 	                return;
 	        }
+	    	boolean isInteger = CommonUtil.isInteger(storageplaceKeyTxt.getText());
+    	 	if (!isInteger) {
+ 	   		message = "Id måste vara en siffra.\nFyll i en siffra eller välj förvaringsplats från tabellen.";
+ 	       	messageTextArea.setText(message);
+            return;
+    	 	}
 	    	int storageplaceKeySelection = Integer.parseInt(storageplaceKeyTxt.getText());
+    	 	boolean storageplaceExists = checkStorageplaceExistance(storageplaceKeySelection);
+        	if (!storageplaceExists) {
+    			message = "Det finns ingen förvaringsplats med det id:t. \nVälj förvaringsplats i tabellen.";
+    			messageTextArea.setText(message);
+                return;
+        	}
+    		else {
 	    	Storageplace storageplace = new Storageplace();
 	    	storageplace = storageplaceRepo.getSelectedStorageplace(storageplaceKeySelection);
 	    	int storageplaceKey = storageplace.getStorageplaceKey();
 	    	String storageplaceName = storageplace.getStorageplaceName();
 	    	messageTextArea.setText("Vald förvaringsplats: \n");
 	    	messageTextArea.appendText("Id: " + storageplaceKey + "\n");
-	    	messageTextArea.appendText("Namn: " + storageplaceName + "\n");   	
+	    	messageTextArea.appendText("Namn: " + storageplaceName + "\n");   
+    		}
 	    }
 
 		
@@ -138,10 +154,23 @@ public class HandleStorageplacesController {
 	        	messageTextArea.setText(message);
 	            return;
 	        }
+	        // Want only one of each storageplace name
+	        String existingStorageplaceName = null;
+	        storageplacesList = new ArrayList<Storageplace>();
+	        storageplacesList = storageplaceRepo.getAllStorageplaces();
+	        for(Storageplace sto : storageplacesList) {
+	        	existingStorageplaceName = sto.getStorageplaceName();
+	        	if(storageplaceNameTxt.getText().equalsIgnoreCase(existingStorageplaceName)) {
+	        		message = "Kategorin finns redan. Ange ett annat kategorinamn.";
+	        		messageTextArea.setText(message);
+	        		return;
+	        	}
+	        }
 	        // New storageplace instance			
 	        Storageplace sto1 = new Storageplace();
 			//sto1.setStorageplaceKey(Integer.parseInt(storageplaceKeyTxt.getText()));
-			sto1.setStorageplaceName(storageplaceNameTxt.getText());
+	        // Storageplaces should be uppercase
+			sto1.setStorageplaceName(storageplaceNameTxt.getText().toUpperCase());
 			message = storageplaceRepo.add(sto1); //TODO
 	        messageTextArea.setText(message); //TODO
 	        //update table
@@ -162,16 +191,32 @@ public class HandleStorageplacesController {
 	            return;
 	        }
 	    	if(!(storageplaceKeyTxt.getText().length() > 0)) {
-	        	message = "Fyll i id för den förvaringsplats som ska uppdateras";
+	        	message = "Fyll i id för den förvaringsplats som ska uppdateras eller välj förvaringsplats från tabellen.";
 	        	messageTextArea.setText(message);
 	            return;
 	        }
-	    	sto1.setStorageplaceKey(Integer.parseInt(storageplaceKeyTxt.getText()));
-			sto1.setStorageplaceName(storageplaceNameTxt.getText());
+	    	boolean isInteger = CommonUtil.isInteger(storageplaceKeyTxt.getText());
+    	 	if (!isInteger) {
+ 	   		message = "Id måste vara en siffra.\nFyll i en siffra eller välj förvaringsplats från tabellen.";
+ 	       	messageTextArea.setText(message);
+            return;
+    	 	}
+    	 	int storageplaceKeySelected = Integer.parseInt(storageplaceKeyTxt.getText());
+    	 	boolean storageplaceExists = checkStorageplaceExistance(storageplaceKeySelected);
+        	if (!storageplaceExists) {
+    			message = "Det finns ingen förvaringsplats med det id:t. \nVälj förvaringsplats i tabellen.";
+    			messageTextArea.setText(message);
+                return;
+        	}
+    		else {
+	    	sto1.setStorageplaceKey(storageplaceKeySelected);
+	    	 // Storageplaces should be uppercase
+			sto1.setStorageplaceName(storageplaceNameTxt.getText().toUpperCase());
 	    	message = storageplaceRepo.update(sto1);
 	        messageTextArea.setText(message);
 	    	updateTable();
 	    	storageplaceTable.refresh();
+    		}
 	    }
 	    
 	    
@@ -186,15 +231,46 @@ public class HandleStorageplacesController {
 	        	messageTextArea.setText(message);
 	            return;
 	        }
-	    	sto.setStorageplaceKey(Integer.parseInt(storageplaceKeyTxt.getText()));
-	    	sto.setStorageplaceName(storageplaceNameTxt.getText());
+	    	boolean isInteger = CommonUtil.isInteger(storageplaceKeyTxt.getText());
+    	 	if (!isInteger) {
+ 	   		message = "Id måste vara en siffra.\nFyll i en siffra eller välj förvaringsplats från tabellen.";
+ 	       	messageTextArea.setText(message);
+            return;
+    	 	}
+    	 	int storageplaceKeySelected = Integer.parseInt(storageplaceKeyTxt.getText());
+    	 	boolean storageplaceExists = checkStorageplaceExistance(storageplaceKeySelected);
+        	if (!storageplaceExists) {
+    			message = "Det finns ingen förvaringsplats med det id:t. \nVälj förvaringsplats i tabellen.";
+    			messageTextArea.setText(message);
+                return;
+        	}
+    		else {
+	    	sto.setStorageplaceKey(storageplaceKeySelected);
+	    	sto.setStorageplaceName(storageplaceNameTxt.getText().toUpperCase());
 	        message = storageplaceRepo.delete(sto);
 	        messageTextArea.setText(message); //TODO
 	        //update table
 	        updateTable();
+    		}
 	        
 	    }
 
-	 
+	    /**
+		 * The check storageplace existance method.
+		 *
+		 * @param storageplaceKey the storageplace Key
+		 * @return the boolean
+		 */
+		private boolean checkStorageplaceExistance(int storageplaceKey) {
+			ArrayList<Storageplace> allStorageplaces = storageplaceRepo.getAllStorageplaces();
+			boolean storageplaceExists = false;
+			for (Storageplace sto : allStorageplaces) {
+				if (sto.getStorageplaceKey() == storageplaceKey) {
+					storageplaceExists = true;
+					break;
+				}
+			}
+			return storageplaceExists;
+		}
 
 }

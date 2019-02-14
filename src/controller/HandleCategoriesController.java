@@ -56,7 +56,7 @@ public class HandleCategoriesController {
     ArrayList<Category> categoriesList;
     Category cat;
     CategoryRepository categoryRepo = new CategoryRepository();
-    CommonUtil cu;
+
     
     /**
      * Initializing the controller class.
@@ -119,8 +119,7 @@ public class HandleCategoriesController {
             	messageTextArea.setText(message);
                 return;
         }
-    	 cu = new CommonUtil();
-    	 boolean isInteger = cu.isInteger(categoryKeyTxt.getText());
+    	 boolean isInteger = CommonUtil.isInteger(categoryKeyTxt.getText());
     	if (!isInteger) {
     		message = "Id måste vara en siffra.\nFyll i en siffra eller välj kategori att visa från tabellen.";
         	messageTextArea.setText(message);
@@ -194,8 +193,7 @@ public class HandleCategoriesController {
         	messageTextArea.setText(message);
             return;
         }
-    	cu = new CommonUtil();
-   	 	boolean isInteger = cu.isInteger(categoryKeyTxt.getText());
+   	 	boolean isInteger = CommonUtil.isInteger(categoryKeyTxt.getText());
    	 	if (!isInteger) {
 	   		message = "Id måste vara en siffra.\nFyll i en siffra eller välj kategori från tabellen.";
 	       	messageTextArea.setText(message);
@@ -229,8 +227,7 @@ public class HandleCategoriesController {
         	messageTextArea.setText(message);
             return;
         }
-    	cu = new CommonUtil();
-   	 	boolean isInteger = cu.isInteger(categoryKeyTxt.getText());
+   	 	boolean isInteger = CommonUtil.isInteger(categoryKeyTxt.getText());
    	 	if (!isInteger) {
 	   		message = "Id måste vara en siffra.\nFyll i en siffra eller välj kategori från tabellen.";
 	       	messageTextArea.setText(message);
@@ -254,9 +251,9 @@ public class HandleCategoriesController {
     }
 
     /**
-	 * The check user existance method.
+	 * The check category existance method.
 	 *
-	 * @param userId the user id
+	 * @param catKey the category Key
 	 * @return the boolean
 	 */
 	private boolean checkCategoryExistance(int catKey) {
