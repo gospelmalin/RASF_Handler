@@ -2,6 +2,7 @@ package controller;
 
 import java.util.ArrayList;
 
+import commonUtilities.CommonUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -55,6 +56,7 @@ public class HandleCategoriesController {
     ArrayList<Category> categoriesList;
     Category cat;
     CategoryRepository categoryRepo = new CategoryRepository();
+    CommonUtil cu;
     
     /**
      * Initializing the controller class.
@@ -117,6 +119,13 @@ public class HandleCategoriesController {
             	messageTextArea.setText(message);
                 return;
         }
+    	 cu = new CommonUtil();
+    	 boolean isInteger = cu.isInteger(categoryKeyTxt.getText());
+    	if (!isInteger) {
+    		message = "Id måste vara en siffra.\nFyll i en siffra eller välj kategori att visa från tabellen.";
+        	messageTextArea.setText(message);
+            return;
+    	}
     	int categoryKeySelection = Integer.parseInt(categoryKeyTxt.getText());
     	boolean categoryExists = checkCategoryExistance(categoryKeySelection);
     	if (!categoryExists) {
@@ -185,6 +194,13 @@ public class HandleCategoriesController {
         	messageTextArea.setText(message);
             return;
         }
+    	cu = new CommonUtil();
+   	 	boolean isInteger = cu.isInteger(categoryKeyTxt.getText());
+   	 	if (!isInteger) {
+	   		message = "Id måste vara en siffra.\nFyll i en siffra eller välj kategori från tabellen.";
+	       	messageTextArea.setText(message);
+           return;
+   	 	}
     	int categoryKeySelection = Integer.parseInt(categoryKeyTxt.getText());
     	boolean categoryExists = checkCategoryExistance(categoryKeySelection);
     	if (!categoryExists) {
@@ -213,6 +229,13 @@ public class HandleCategoriesController {
         	messageTextArea.setText(message);
             return;
         }
+    	cu = new CommonUtil();
+   	 	boolean isInteger = cu.isInteger(categoryKeyTxt.getText());
+   	 	if (!isInteger) {
+	   		message = "Id måste vara en siffra.\nFyll i en siffra eller välj kategori från tabellen.";
+	       	messageTextArea.setText(message);
+           return;
+   	 	}
     	int categoryKeySelection = Integer.parseInt(categoryKeyTxt.getText());
     	boolean categoryExists = checkCategoryExistance(categoryKeySelection);
     	if (!categoryExists) {
