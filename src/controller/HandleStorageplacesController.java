@@ -163,7 +163,7 @@ public class HandleStorageplacesController {
 	        for(Storageplace sto : storageplacesList) {
 	        	existingStorageplaceName = sto.getStorageplaceName();
 	        	if(storageplaceNameTxt.getText().equalsIgnoreCase(existingStorageplaceName)) {
-	        		message = "Kategorin finns redan. Ange ett annat kategorinamn.";
+	        		message = "Det finns redan en förvaringsplats med det namnet. \nAnge ett annat förvaringsplatsnamn.";
 	        		messageTextArea.setText(message);
 	        		return;
 	        	}
