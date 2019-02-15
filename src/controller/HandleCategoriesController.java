@@ -147,6 +147,8 @@ public class HandleCategoriesController {
     void addCategory(ActionEvent event) {
     	System.out.println("addCategory called");
     	String message = null;
+    	// id (categoryKey) should be empty to avoid confusion as database will generate it
+    	categoryKeyTxt.setText("");
         //Text fields cannot be empty
         if(!(categoryNameTxt.getText().length() > 0)) {
         	message = "Ange namn innan du försöker lägga till en kategori.";

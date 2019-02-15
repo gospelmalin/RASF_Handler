@@ -148,6 +148,8 @@ public class HandleStorageplacesController {
 	    void addStorageplace(ActionEvent event) {
 	    	System.out.println("addStorageplace called");
 	    	String message = null;
+	    	// id (storageplaceKey) should be empty to avoid confusion as database will generate it
+	    	storageplaceKeyTxt.setText("");
 	        //Text fields cannot be empty
 	        if(!(storageplaceNameTxt.getText().length() > 0)) {
 	        	message = "Fyll i förvaringsplatsens namn innan du försöker lägga till en förvaringsplats.";
