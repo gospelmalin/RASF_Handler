@@ -323,7 +323,7 @@ public class HandleItemsController {
         for(Item i : itemsList) {
         	existingItemName = i.getItemName();
         	if(itemNameTxt.getText().equalsIgnoreCase(existingItemName)) {
-        		message = "Det finns redan en matvara med det namnet. \nAnge ett annat namn.";
+        		message = "Det finns redan en matvara med det namnet. \nVälj Uppdatera istället, eller ange ett nytt namn för att lägga till något annat.";
         		messageTextArea.setText(message);
         		return;
         	}
@@ -398,18 +398,30 @@ public class HandleItemsController {
 		else {
 			availableTxt.setText("NO");
 		}
-    	i.setItemKey(Integer.parseInt(itemKeyTxt.getText()));
-    	i.setCategoryKey(Integer.parseInt(categoryKeyTxt.getText()));
-		i.setItemName(itemNameTxt.getText());
-		i.setUnitsAlways(Integer.parseInt(alwaysAtHomeTxt.getText()));
-		i.setAvailable(availableTxt.getText());
-		i.setNumberOfUnits(Integer.parseInt(numberOfUnitsTxt.getText()));
-		i.setStorageplaceKey(Integer.parseInt(storageplaceKeyTxt.getText()));
-    	message = itemRepo.update(i);
-        messageTextArea.setText(message);
-        resetFields(); // Empty input text fields
-    	updateTable();
-    	itemTable.refresh();
+    	// Input in itemKey (id) not allowed. No need to check that is is an integer
+    	int itemKeySelected = Integer.parseInt(itemKeyTxt.getText());
+    	// check that item exist (as it originally was selected in the table and delete not is allowed it is a bit superfluous
+	 	boolean itemExists = checkItemExistance(itemKeySelected);
+    	if (!itemExists) {
+			message = "Det finns ingen matvara med det id:t. \nVälj en matvara i tabellen.";
+			messageTextArea.setText(message);
+            return;
+    	}
+		else {
+	    	i.setItemKey(itemKeySelected);
+	    	i.setCategoryKey(Integer.parseInt(categoryKeyTxt.getText()));
+	    	// Item name should be uppercase
+			i.setItemName(itemNameTxt.getText().toUpperCase());
+			i.setUnitsAlways(Integer.parseInt(alwaysAtHomeTxt.getText()));
+			i.setAvailable(availableTxt.getText());
+			i.setNumberOfUnits(Integer.parseInt(numberOfUnitsTxt.getText()));
+			i.setStorageplaceKey(Integer.parseInt(storageplaceKeyTxt.getText()));
+	    	message = itemRepo.update(i);
+	        messageTextArea.setText(message);
+	        resetFields(); // Empty input text fields
+	    	updateTable();
+	    	itemTable.refresh();
+		}
 	}
 	
     @FXML
