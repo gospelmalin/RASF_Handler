@@ -316,12 +316,24 @@ public class HandleItemsController {
 		else {
 			availableTxt.setText("NO");
 		}
-    	
+        // Want only one of each item name
+        String existingItemName = null;
+        itemsList = new ArrayList<Item>();
+        itemsList = itemRepo.getAllItems();
+        for(Item i : itemsList) {
+        	existingItemName = i.getItemName();
+        	if(itemNameTxt.getText().equalsIgnoreCase(existingItemName)) {
+        		message = "Det finns redan en matvara med det namnet. \nAnge ett annat namn.";
+        		messageTextArea.setText(message);
+        		return;
+        	}
+        }
         // New item instance			
 		Item i1 = new Item();
 		//i1.setItemKey(Integer.parseInt(itemKeyTxt.getText()));
 		i1.setCategoryKey(Integer.parseInt(categoryKeyTxt.getText()));
-		i1.setItemName(itemNameTxt.getText());
+		// Items should be uppercase
+		i1.setItemName(itemNameTxt.getText().toUpperCase());
 		i1.setUnitsAlways(Integer.parseInt(alwaysAtHomeTxt.getText()));
 		i1.setAvailable(availableTxt.getText());
 		i1.setNumberOfUnits(Integer.parseInt(numberOfUnitsTxt.getText()));
