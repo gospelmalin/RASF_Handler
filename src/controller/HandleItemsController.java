@@ -3,6 +3,7 @@ package controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import commonUtilities.CommonUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -234,31 +235,40 @@ public class HandleItemsController {
             	messageTextArea.setText(message);
                 return;
         }
+    // No need to check that input in itemKey is integer - not possible to edit that field.
     	int itemKeySelection = Integer.parseInt(itemKeyTxt.getText());
-    	Item item = new Item();
-    	item = itemRepo.getSelectedItem(itemKeySelection);
-    	int itemKey = item.getItemKey();
-    	String itemName = item.getItemName();
-    	int numberOfUnits = item.getNumberOfUnits();
-    	int unitsAlways = item.getUnitsAlways();
-    	int categoryKey = item.getCategoryKey();
-    	String categoryName = item.getCategoryName();
-    	String available = item.getAvailable();
-    	int storageplaceKey = item.getStorageplaceKey();
-    	String storageplaceName = item.getStorageplaceName();
-    	int numberToBuy = item.getNumberToBuy();
-    	
-    	messageTextArea.setText("Vald matvara: \n");
-    	messageTextArea.appendText("Id: " + itemKey + "\n");
-    	messageTextArea.appendText("Namn: " + itemName + "\n");  
-    	messageTextArea.appendText("Antal: " + numberOfUnits + "\n");
-    	messageTextArea.appendText("Antal alltid hemma: " + unitsAlways + "\n");
-    	messageTextArea.appendText("Finns hemma: " + available + "\n");
-    	messageTextArea.appendText("Kategori id: " + categoryKey + "\n");
-    	messageTextArea.appendText("Kategori: " + categoryName + "\n");
-    	messageTextArea.appendText("Förvaringsid: " + storageplaceKey + "\n");
-    	messageTextArea.appendText("Förvaringsplats: " + storageplaceName + "\n"); 	
-    	messageTextArea.appendText("Antal att köpa: " + numberToBuy + "\n");
+    	boolean itemExists = checkItemExistance(itemKeySelection);
+    	if (!itemExists) {
+			message = "Det finns ingen matvara med det id:t. \nVälj matvara i tabellen.";
+			messageTextArea.setText(message);
+            return;
+    	}
+		else {
+	    	Item item = new Item();
+	    	item = itemRepo.getSelectedItem(itemKeySelection);
+	    	int itemKey = item.getItemKey();
+	    	String itemName = item.getItemName();
+	    	int numberOfUnits = item.getNumberOfUnits();
+	    	int unitsAlways = item.getUnitsAlways();
+	    	int categoryKey = item.getCategoryKey();
+	    	String categoryName = item.getCategoryName();
+	    	String available = item.getAvailable();
+	    	int storageplaceKey = item.getStorageplaceKey();
+	    	String storageplaceName = item.getStorageplaceName();
+	    	int numberToBuy = item.getNumberToBuy();
+	    	
+	    	messageTextArea.setText("Vald matvara: \n");
+	    	messageTextArea.appendText("Id: " + itemKey + "\n");
+	    	messageTextArea.appendText("Namn: " + itemName + "\n");  
+	    	messageTextArea.appendText("Antal: " + numberOfUnits + "\n");
+	    	messageTextArea.appendText("Antal alltid hemma: " + unitsAlways + "\n");
+	    	messageTextArea.appendText("Finns hemma: " + available + "\n");
+	    	messageTextArea.appendText("Kategori id: " + categoryKey + "\n");
+	    	messageTextArea.appendText("Kategori: " + categoryName + "\n");
+	    	messageTextArea.appendText("Förvaringsid: " + storageplaceKey + "\n");
+	    	messageTextArea.appendText("Förvaringsplats: " + storageplaceName + "\n"); 	
+	    	messageTextArea.appendText("Antal att köpa: " + numberToBuy + "\n");
+		}
     }
 	
 	@FXML
@@ -446,5 +456,23 @@ public class HandleItemsController {
         availableTxt.setText("");
       //  storageplaceNameTxt.setText(""); //TODO to be deleted?
     }
+    
+    /**
+		 * The check item existance method.
+		 *
+		 * @param itemKey the item Key
+		 * @return the boolean
+		 */
+		private boolean checkItemExistance(int itemKey) {
+			ArrayList<Item> allItems = itemRepo.getAllItems();
+			boolean itemExists = false;
+			for (Item item : allItems) {
+				if (item.getItemKey() == itemKey) {
+					itemExists = true;
+					break;
+				}
+			}
+			return itemExists;
+		}
     
 }

@@ -82,7 +82,7 @@ public class HandleStorageplacesController {
 	     */
 	    @FXML
 	    private void TableClicked(MouseEvent event) {
-	       sto =storageplaceTable.getSelectionModel().getSelectedItem();
+	       sto = storageplaceTable.getSelectionModel().getSelectedItem();
 	       storageplaceKeyTxt.setText(String.valueOf(sto.getStorageplaceKey())); // Convert to String.
 	       storageplaceNameTxt.setText(sto.getStorageplaceName());
 	    }
@@ -121,7 +121,7 @@ public class HandleStorageplacesController {
 	        }
 	    	boolean isInteger = CommonUtil.isInteger(storageplaceKeyTxt.getText());
     	 	if (!isInteger) {
- 	   		message = "Id måste vara en siffra.\nFyll i en siffra eller välj förvaringsplats från tabellen.";
+ 	   		message = "Id måste vara en siffra.\nFyll i en siffra eller välj förvaringsplats i tabellen.";
  	       	messageTextArea.setText(message);
             return;
     	 	}
