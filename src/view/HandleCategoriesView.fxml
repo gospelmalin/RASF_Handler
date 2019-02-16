@@ -37,6 +37,6 @@
       <Button fx:id="addCategoryBtn" layoutX="347.0" layoutY="336.0" mnemonicParsing="false" onAction="#addCategory" prefHeight="25.0" prefWidth="86.0" text="Lägg till ny" wrapText="true" />
       <Button fx:id="updateCategoryBtn" layoutX="445.0" layoutY="336.0" mnemonicParsing="false" onAction="#updateCategory" prefHeight="25.0" prefWidth="86.0" text="Uppdatera" textAlignment="CENTER" wrapText="true" />
       <Button fx:id="deleteCategoryBtn" layoutX="347.0" layoutY="369.0" mnemonicParsing="false" onAction="#deleteCategory" prefHeight="25.0" prefWidth="86.0" text="Ta bort" textAlignment="CENTER" wrapText="true" />
-      <Button fx:id="homeBtn" layoutX="531.0" layoutY="19.0" mnemonicParsing="false" onAction="#openStartView" text="Home" />
+      <Button fx:id="homeBtn" layoutX="531.0" layoutY="19.0" mnemonicParsing="false" onAction="#openStartView" text="Hem" />
    </children>
 </AnchorPane>
