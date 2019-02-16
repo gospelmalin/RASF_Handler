@@ -105,6 +105,9 @@ public class HandleItemsController {
     
     @FXML
     private Button openShoppingListBtn;
+    
+    @FXML
+    private Button refreshTableBtn;
    
     
     @FXML
@@ -217,6 +220,11 @@ public class HandleItemsController {
 			itemTable.setItems((ObservableList<Item>) list);
 		}
 		
+	@FXML
+	void refreshTable(ActionEvent event) {
+		updateTable();
+		itemTable.refresh();
+	}
 		
 	@FXML
     void openStartView(ActionEvent event) {

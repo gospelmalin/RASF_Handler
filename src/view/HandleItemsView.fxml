@@ -57,9 +57,10 @@
       <TextField fx:id="availableTxt" layoutX="469.0" layoutY="265.0" prefHeight="25.0" prefWidth="35.0" promptText="Finns?" />
       <Label layoutX="471.0" layoutY="249.0" prefHeight="17.0" prefWidth="42.0" text="Finns?" wrapText="true" />
       <Label layoutX="69.0" layoutY="288.0" text="Förvaringsplats" />
-      <ChoiceBox fx:id="categoryChoiceBox" layoutX="255.0" layoutY="265.0" onAction="#categorySelected" prefHeight="25.0" prefWidth="209.0" />
+      <ChoiceBox fx:id="categoryChoiceBox" layoutX="255.0" layoutY="265.0" onAction="#categorySelected" onMouseClicked="#updateCategoryChoices" prefHeight="25.0" prefWidth="209.0" />
       <Button fx:id="resetFieldsBtn" layoutX="342.0" layoutY="368.0" mnemonicParsing="false" onAction="#resetAllFields" prefHeight="25.0" prefWidth="86.0" text="Nollställ fält" wrapText="true" />
-      <ChoiceBox fx:id="storageChoiceBox" layoutX="57.0" layoutY="304.0" onAction="#storageSelected" prefHeight="25.0" prefWidth="134.0" />
+      <ChoiceBox fx:id="storageChoiceBox" layoutX="57.0" layoutY="304.0" onAction="#storageSelected" onMouseClicked="#updateStorageplaceChoices" prefHeight="25.0" prefWidth="134.0" />
       <Button fx:id="openShoppingListBtn" layoutX="506.0" layoutY="345.0" mnemonicParsing="false" onAction="#openShoppingList" prefHeight="46.0" prefWidth="86.0" text="Öppna inköpslistan" textAlignment="CENTER" wrapText="true" />
+      <Button fx:id="refreshTableBtn" layoutX="273.0" layoutY="15.0" mnemonicParsing="false" onAction="#refreshTable" prefHeight="31.0" prefWidth="149.0" text="Uppdatera tabellen" wrapText="true" />
    </children>
 </AnchorPane>
