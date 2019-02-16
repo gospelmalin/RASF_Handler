@@ -475,6 +475,9 @@ public class HandleItemsController {
     @FXML
     void deleteItem(ActionEvent event) {
     	System.out.println("delete called - delete items not allowed");
+    	String message = null;
+    	message = "Matvaror får inte tas bort. Använd Uppdatera för att ändra antalet av en matvara till noll.";
+    	messageTextArea.setText(message);
     }
 
     private void updateListOfCategories() {
