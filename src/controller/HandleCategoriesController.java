@@ -82,9 +82,14 @@ public class HandleCategoriesController {
      */
     @FXML
     private void TableClicked(MouseEvent event) {
+     	if (categoryTable.getSelectionModel().getSelectedItem()== null) {
+    		return;
+    	}
+     	else {
        cat = categoryTable.getSelectionModel().getSelectedItem();
        categoryKeyTxt.setText(String.valueOf(cat.getCategoryKey())); // Convert to String.
        categoryNameTxt.setText(cat.getCategoryName());
+     	}
     }
     
     /**
