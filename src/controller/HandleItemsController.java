@@ -190,8 +190,18 @@ public class HandleItemsController {
     }
     
     @FXML
+    void updateCategoryChoices(MouseEvent event) {
+    	updateListOfCategories();
+    }
+    
+    @FXML
     void storageSelected(ActionEvent event) {
     	storageplaceKeyTxt.setText(String.valueOf(storageplaceWithId.get(storageChoiceBox.getValue()))); //Konvertera detta till en String.
+    }
+    
+    @FXML
+    void updateStorageplaceChoices(MouseEvent event) {
+    	updateListOfStorageplaces();
     }
     
  
@@ -301,6 +311,20 @@ public class HandleItemsController {
         	messageTextArea.setText(message);
             return;
         }
+    	// numberOfUnits must be integer
+    	boolean isInteger = CommonUtil.isInteger(numberOfUnitsTxt.getText());
+	 	if (!isInteger) {
+	   		message = "Antal måste vara en siffra.\nFyll i en siffra.";
+	       	messageTextArea.setText(message);
+        return;
+	 	}
+	 	// alwaysAtHome must be integer
+    	isInteger = CommonUtil.isInteger(alwaysAtHomeTxt.getText());
+	 	if (!isInteger) {
+	   		message = "Antal alltid hemma måste vara en siffra.\nFyll i en siffra.";
+	       	messageTextArea.setText(message);
+        return;
+	 	}
     	if(!(availableTxt.getText().length() > 0)) {
     		if(Integer.parseInt(numberOfUnitsTxt.getText())>0) {
     			availableTxt.setText("YES");
@@ -309,13 +333,15 @@ public class HandleItemsController {
     			availableTxt.setText("NO");
     		}
         }
-    	//available must have appropriate values
+    	
+    	// available must have appropriate values
     	if(Integer.parseInt(numberOfUnitsTxt.getText())>0) {
 			availableTxt.setText("YES");
 		}
 		else {
 			availableTxt.setText("NO");
 		}
+    	
         // Want only one of each item name
         String existingItemName = null;
         itemsList = new ArrayList<Item>();
@@ -383,6 +409,20 @@ public class HandleItemsController {
         	messageTextArea.setText(message);
             return;
         }
+    	// numberOfUnits must be integer
+    	boolean isInteger = CommonUtil.isInteger(numberOfUnitsTxt.getText());
+	 	if (!isInteger) {
+	   		message = "Antal måste vara en siffra.\nFyll i en siffra.";
+	       	messageTextArea.setText(message);
+        return;
+	 	}
+	 	// alwaysAtHome must be integer
+    	isInteger = CommonUtil.isInteger(alwaysAtHomeTxt.getText());
+	 	if (!isInteger) {
+	   		message = "Antal alltid hemma måste vara en siffra.\nFyll i en siffra.";
+	       	messageTextArea.setText(message);
+        return;
+	 	}
     	if(!(availableTxt.getText().length() > 0)) {
     		if(Integer.parseInt(numberOfUnitsTxt.getText())>0) {
     			availableTxt.setText("YES");
@@ -430,7 +470,7 @@ public class HandleItemsController {
     }
 
     private void updateListOfCategories() {
-
+    	
         //get repository
         CategoryRepository cr = new CategoryRepository();
         ArrayList<Category> categoryArray = cr.getAllCategories();
@@ -447,7 +487,7 @@ public class HandleItemsController {
     }
     
     private void updateListOfStorageplaces() {
-
+    	
         //get repository
         StorageplaceRepository sr = new StorageplaceRepository();
         ArrayList<Storageplace> storageplaceArray = sr.getAllStorageplaces();
@@ -460,7 +500,6 @@ public class HandleItemsController {
         // To set the items in the choice box:
         ObservableList<String> availableStorageplaces = FXCollections.observableArrayList(storageplaceWithId.keySet());
         storageChoiceBox.setItems(availableStorageplaces);
-
     }
     
     
