@@ -82,9 +82,14 @@ public class HandleStorageplacesController {
 	     */
 	    @FXML
 	    private void TableClicked(MouseEvent event) {
+	     	if (storageplaceTable.getSelectionModel().getSelectedItem()== null) {
+	    		return;
+	    	}
+	     	else {
 	       sto = storageplaceTable.getSelectionModel().getSelectedItem();
 	       storageplaceKeyTxt.setText(String.valueOf(sto.getStorageplaceKey())); // Convert to String.
 	       storageplaceNameTxt.setText(sto.getStorageplaceName());
+	     	}
 	    }
 	    
 	    /**
