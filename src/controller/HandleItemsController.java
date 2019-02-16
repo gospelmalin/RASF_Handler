@@ -478,7 +478,7 @@ public class HandleItemsController {
     }
 
     private void updateListOfCategories() {
-    	
+    	categoryWithId.clear();//TODO TEST
         //get repository
         CategoryRepository cr = new CategoryRepository();
         ArrayList<Category> categoryArray = cr.getAllCategories();
@@ -492,9 +492,12 @@ public class HandleItemsController {
         ObservableList<String> availableCategories = FXCollections.observableArrayList(categoryWithId.keySet());
         categoryChoiceBox.setItems(availableCategories);
 
+        updateTable(); //TODO TEST
+        itemTable.refresh();
     }
     
     private void updateListOfStorageplaces() {
+    	storageplaceWithId.clear();//TODO TEST
     	
         //get repository
         StorageplaceRepository sr = new StorageplaceRepository();
@@ -508,6 +511,9 @@ public class HandleItemsController {
         // To set the items in the choice box:
         ObservableList<String> availableStorageplaces = FXCollections.observableArrayList(storageplaceWithId.keySet());
         storageChoiceBox.setItems(availableStorageplaces);
+        
+        updateTable(); //TODO TEST
+        itemTable.refresh(); //TODO TEST
     }
     
     
