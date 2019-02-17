@@ -34,25 +34,25 @@ public class StartViewController {
     @FXML
     void openHandleCategories(ActionEvent event) {
     	ViewController.activate("HandleCategories");
-    	System.out.println("HandleCategoriesView should be shown.");
+    	//System.out.println("HandleCategoriesView should be shown.");
     }
 
     @FXML
     void openHandleItems(ActionEvent event) {
     	ViewController.activate("HandleItems");
-    	System.out.println("HandleItemsView should be shown.");
+    	//System.out.println("HandleItemsView should be shown.");
     }
 
     @FXML
     void openHandleStorage(ActionEvent event) {
     	ViewController.activate("HandleStorage");
-    	System.out.println("HandleStorageView should be shown.");
+    	//System.out.println("HandleStorageView should be shown.");
     }
 
     @FXML
     void openShoppingList(ActionEvent event) {
     	ViewController.activate("ShoppingList");
-    	System.out.println("ShoppingListView should be shown.");
+    	//System.out.println("ShoppingListView should be shown.");
     }
 
 }
