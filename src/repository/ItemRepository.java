@@ -32,7 +32,7 @@ public class ItemRepository {
 		RESTClient rc = new RESTClient();
 		
 		String xmlString = rc.getAllItems();
-		System.out.println("jag har fått xml-strängen: " + xmlString);
+	//	System.out.println("jag har fått xml-strängen: " + xmlString);
 		
 		ArrayList<Item> itemsList =  new ArrayList<Item>();
 		itemsList = jaxbXmlStringToObject(xmlString);
