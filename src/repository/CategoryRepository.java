@@ -33,14 +33,6 @@ public class CategoryRepository {
 		String xmlString = rc.getAllCategories();
 		ArrayList<Category> categoriesList =  new ArrayList<Category>();
 		categoriesList = jaxbXmlStringToObject(xmlString);
-		//TODO TEMP from here
-		/*
-		Category c = new Category(1, "FISK"); //TODO TEMP dev data
-		categoriesList.add(c); //TODO TEMP dev data
-		c = new Category(2, "GRÖNSAKER"); //TODO TEMP dev data
-		categoriesList.add(c);		//TODO TEMP dev data
-		*/
-		//Until here
 		return categoriesList;
 	}
 	
