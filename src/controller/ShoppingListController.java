@@ -9,7 +9,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
@@ -155,6 +154,9 @@ public class ShoppingListController {
    			itemTable.refresh(); //TODO check if it helps
    		}
    		
+   		/**
+      	  * Open startView.
+      	  */
    		@FXML
    	    void openStartView(ActionEvent event) {
    	    	//System.out.println("Start view should open");
@@ -166,7 +168,10 @@ public class ShoppingListController {
    		updateTable();
    		itemTable.refresh();
       }
-   		
+   	
+   	  /**
+	  * Reset all text fields.
+	  */
    	 @FXML
      void resetAllFields(ActionEvent event) {
      	itemKeyTxt.setText("");
@@ -181,6 +186,12 @@ public class ShoppingListController {
          numberToBuyTxt.setText("");
      }
    	 
+     /**
+   	  * Create shopping list
+   	  * 
+   	  * @param ArrayList<item>
+   	  * @return itemsToBuyList Array list of items to buy
+   	  */
    	 private ArrayList<Item> createShoppingList(ArrayList<Item> itemsList) {
    		 ArrayList<Item> itemsToBuyList = new ArrayList<Item>();
    		 for (Item item : itemsList) {
