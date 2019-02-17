@@ -14,7 +14,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import model.Category;
 import model.Storageplace;
 import repository.StorageplaceRepository;
 
@@ -64,7 +63,7 @@ public class HandleStorageplacesController {
 	    //This method is automatically called after the fxml file has been loaded.
 	    @FXML
 	    private void initialize () {
-	    	System.out.println("HandleStorageplaceController initiated!");
+	    //	System.out.println("HandleStorageplaceController initiated!");
 		
 	    	// mouseclick eventhandler
 	    	storageplaceTable.setOnMouseClicked(this::TableClicked);
@@ -102,21 +101,35 @@ public class HandleStorageplacesController {
 				ObservableList<Storageplace> list = FXCollections.observableArrayList(storageplacesList);
 				storageplaceTable.setItems((ObservableList<Storageplace>) list);
 			}
-			
+		
+		/**
+		  * Open Start View.
+		  * 
+		  * @param event the event
+		  */
 		@FXML
 	    void openStartView(ActionEvent event) {
 	    	//System.out.println("Start view should open");
 	    	ViewController.activate("StartView");
 	    }
 		
+		/**
+		  * Show all storageplaces.
+		  * 
+		  */
 		void showAllStorageplaces() {
-			System.out.println("showAllStorageplaces called");
+			//System.out.println("showAllStorageplaces called");
 			//TODO
 		}
 		
+		/**
+		  * Show Selected Storageplace.
+		  * 
+		  * @param event the event
+		  */
 		@FXML
 	    void showSelectedStorageplace(ActionEvent event) {
-	    	System.out.println("showSelectedStorageplace called");
+	    	//System.out.println("showSelectedStorageplace called");
 	    	String message = null;
 	    	//Text fields should not be empty
 	    	if(!(storageplaceKeyTxt.getText().length() > 0)) {
@@ -148,7 +161,11 @@ public class HandleStorageplacesController {
     		}
 	    }
 
-		
+		/**
+		  * Add storageplace.
+		  * 
+		  * @param event the event
+		  */
 	    @FXML
 	    void addStorageplace(ActionEvent event) {
 	    	System.out.println("addStorageplace called");
@@ -185,6 +202,11 @@ public class HandleStorageplacesController {
 	        storageplaceTable.refresh();
 	    }
 	    
+	    /**
+		  * Update storageplace.
+		  * 
+		  * @param event the event
+		  */
 	    @FXML
 	    void updateStorageplace(ActionEvent event) {
 	    	System.out.println("updateStorageplace called");
@@ -226,7 +248,11 @@ public class HandleStorageplacesController {
     		}
 	    }
 	    
-	    
+	    /**
+		  * Delete storageplace.
+		  * 
+		  * @param event the event
+		  */
 	    @FXML
 	    void deleteStorageplace(ActionEvent event) {
 	    	System.out.println("deleteStorageplace called");
