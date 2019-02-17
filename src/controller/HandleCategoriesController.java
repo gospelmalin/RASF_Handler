@@ -64,7 +64,7 @@ public class HandleCategoriesController {
     //This method is automatically called after the fxml file has been loaded.
     @FXML
     private void initialize () {
-    	System.out.println("HandleCategoriesController initiated!");
+    	//System.out.println("HandleCategoriesController initiated!");
 	
     	// mouseclick eventhandler
     	categoryTable.setOnMouseClicked(this::TableClicked);
@@ -102,7 +102,12 @@ public class HandleCategoriesController {
 			ObservableList<Category> list = FXCollections.observableArrayList(categoriesList);
 			categoryTable.setItems((ObservableList<Category>) list);
 		}
-		
+	
+	 /**
+	  * Open Start View.
+	  * 
+	  * @param event the event
+	  */
 	@FXML
     void openStartView(ActionEvent event) {
     	//System.out.println("Start view should open");
@@ -110,10 +115,15 @@ public class HandleCategoriesController {
     }
 	
 	void showAllCategories() {
-		System.out.println("showAllCategories called");
+		//System.out.println("showAllCategories called");
 		//TODO
 	}
 	
+	/**
+	  * Show Selected Category.
+	  * 
+	  * @param event the event
+	  */
 	@FXML
     void showSelectedCategory(ActionEvent event) {
     	System.out.println("showSelectedCategory called");
@@ -148,6 +158,11 @@ public class HandleCategoriesController {
 		}
     }
 
+	/**
+	  * Add category.
+	  * 
+	  * @param event the event
+	  */
     @FXML
     void addCategory(ActionEvent event) {
     	System.out.println("addCategory called");
@@ -177,13 +192,18 @@ public class HandleCategoriesController {
 		//c1.setCategoryKey(Integer.parseInt(categoryKeyTxt.getText()));
 		// Categories should be uppercase
 		c1.setCategoryName(categoryNameTxt.getText().toUpperCase());
-		message = categoryRepo.add(c1); //TODO
-        messageTextArea.setText(message); //TODO
+		message = categoryRepo.add(c1);
+        messageTextArea.setText(message);
         //update table
         updateTable();
         categoryTable.refresh();
     }
     
+    /**
+	  * Update category.
+	  * 
+	  * @param event the event
+	  */
     @FXML
     void updateCategory(ActionEvent event) {
     	System.out.println("updateCategory called");
@@ -223,7 +243,11 @@ public class HandleCategoriesController {
 		}
     }
     
-    
+    /**
+	  * Delete category.
+	  * 
+	  * @param event the event
+	  */
     @FXML
     void deleteCategory(ActionEvent event) {
     	System.out.println("deleteCategory called");
@@ -251,7 +275,7 @@ public class HandleCategoriesController {
     	cat.setCategoryKey(categoryKeySelection);
     	cat.setCategoryName(categoryNameTxt.getText().toUpperCase());
         message = categoryRepo.delete(cat);
-        messageTextArea.setText(message); //TODO
+        messageTextArea.setText(message);
         //update table
         updateTable();
 		}
