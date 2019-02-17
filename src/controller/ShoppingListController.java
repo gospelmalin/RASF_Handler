@@ -98,7 +98,7 @@ public class ShoppingListController {
     //This method is automatically called after the fxml file has been loaded.
     @FXML
     private void initialize () {
-    	System.out.println("HandleItemsController initiated!");
+    	// System.out.println("HandleShoppingListController initiated!");
 	
     	// mouseclick eventhandler
     	itemTable.setOnMouseClicked(this::TableClicked);
