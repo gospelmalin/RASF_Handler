@@ -33,7 +33,7 @@ public class StorageplaceRepository {
 		RESTClient rc = new RESTClient();
 		
 		String xmlString = rc.getAllStorageplaces();
-		System.out.println("jag har fått xml-strängen: " + xmlString);
+		// System.out.println("jag har fått xml-strängen: " + xmlString);
 		
 		ArrayList<Storageplace> storageplacesList =  new ArrayList<Storageplace>();
 		storageplacesList = jaxbXmlStringToObject(xmlString);
@@ -93,7 +93,11 @@ public class StorageplaceRepository {
 		return message;	
 	}
 	
-	
+	/**
+	 * Create object from xml string
+	 *
+	 * @return storageplacesList ArrayList
+	 */
 	private ArrayList<Storageplace> jaxbXmlStringToObject(String xmlString) { 
 		ArrayList<Storageplace> storageplacesList =  new ArrayList<Storageplace>();
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance(); 
@@ -106,9 +110,9 @@ public class StorageplaceRepository {
 				Element element = (Element)nStorageplaces.item(temp); 
 				int storageplaceKey = Integer.parseInt(element.getElementsByTagName("storageplaceKey").item(0).getTextContent());
 				String storageplaceName = element.getElementsByTagName("storageplaceName").item(0).getTextContent(); 
-				//String tray = element.getElementsByTagName("tray").item(0).getTextContent();  
+				// String tray = element.getElementsByTagName("tray").item(0).getTextContent();  
 				Storageplace storageplace = new Storageplace(storageplaceKey, storageplaceName); // Create a Storageplace object 
-				System.out.println("Printing a storageplace: " + storageplace); // call the Storageplace object's toString-method and print 
+				// System.out.println("Printing a storageplace: " + storageplace); // call the Storageplace object's toString-method and print 
 				storageplacesList.add(storageplace);
 			}
 		} catch (NumberFormatException e1) {
