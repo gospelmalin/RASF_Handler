@@ -1,15 +1,11 @@
 package repository;
 
-import javax.ws.rs.FormParam;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Form;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-
 import model.Category;
 import model.Item;
 import model.Storageplace;
@@ -86,7 +82,7 @@ public class RESTClient {
 	protected String addCategory(Category category) {
 		Form form = new Form();
 	    form.param("categoryName", category.getCategoryName());
-	    System.out.println("this is categoryName param: " + category.getCategoryName()); //TODO TEMP
+	    //System.out.println("this is categoryName param: " + category.getCategoryName()); //TODO TEMP
 	    RESTClient rc = new RESTClient();
 	    String callResult = rc.client
 	       .target(REST_SERVICE_URL_CAT)
@@ -95,7 +91,7 @@ public class RESTClient {
 	          MediaType.APPLICATION_FORM_URLENCODED_TYPE),
 	          String.class);
 	    String returnMessage = "Add category request returned: \n" + callResult;		
-	    System.out.println(returnMessage);
+	//    System.out.println(returnMessage);
 	    return returnMessage;
 	}
 
@@ -120,7 +116,7 @@ public class RESTClient {
 	          MediaType.APPLICATION_FORM_URLENCODED_TYPE),
 	          String.class);
 	    String returnMessage = "Update category request returned: \n" + callResult;
-	    System.out.println(returnMessage);	    
+//	    System.out.println(returnMessage);	    
 	return returnMessage;
 	}
 	
@@ -139,7 +135,7 @@ public class RESTClient {
 	         .request(MediaType.APPLICATION_XML)
 	         .delete(String.class);
 	 String returnMessage = "Delete category request returned: \n" + callResult;
-	 System.out.println(returnMessage);	
+//	 System.out.println(returnMessage);	
 	return returnMessage;
 	}
 
@@ -207,7 +203,7 @@ public class RESTClient {
 	          MediaType.APPLICATION_FORM_URLENCODED_TYPE),
 	          String.class);
 	    String returnMessage = "Add item request returned: \n" + callResult;		
-	    System.out.println(returnMessage);
+	//    System.out.println(returnMessage);
 	    return returnMessage;
 	}
 
@@ -237,7 +233,7 @@ public class RESTClient {
 	          MediaType.APPLICATION_FORM_URLENCODED_TYPE),
 	          String.class);
 	    String returnMessage = "Update item request returned: \n" + callResult;
-	    System.out.println(returnMessage);	    
+	//    System.out.println(returnMessage);	    
 	return returnMessage;
 	}
 	
@@ -322,7 +318,7 @@ public class RESTClient {
 	          MediaType.APPLICATION_FORM_URLENCODED_TYPE),
 	          String.class);
 	    String returnMessage = "Add storageplace request returned: \n" + callResult;		
-	    System.out.println(returnMessage);
+//	    System.out.println(returnMessage);
 	    return returnMessage;
 	}
 
@@ -347,7 +343,7 @@ public class RESTClient {
 	          MediaType.APPLICATION_FORM_URLENCODED_TYPE),
 	          String.class);
 	    String returnMessage = "Update storageplace request returned: \n" + callResult;
-	    System.out.println(returnMessage);	    
+	//    System.out.println(returnMessage);	    
 	return returnMessage;
 	}
 	
@@ -366,7 +362,7 @@ public class RESTClient {
 	         .request(MediaType.APPLICATION_XML)
 	         .delete(String.class);
 	 String returnMessage = "Delete storageplace request returned: \n" + callResult;
-	 System.out.println(returnMessage);	
+	// System.out.println(returnMessage);	
 	return returnMessage;
 	}
 	
