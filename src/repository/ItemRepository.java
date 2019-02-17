@@ -108,7 +108,7 @@ public class ItemRepository {
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder(); 
 			Document doc = dBuilder.parse(new InputSource(new StringReader(xmlString)));
 			NodeList nItems = doc.getElementsByTagName("item"); // extract a list of element from the tag structure 
-			System.out.println("length nItems: " + nItems.getLength()); // Printing lenght of nodelist
+		//	System.out.println("length nItems: " + nItems.getLength()); // Printing lenght of nodelist
 			for (int temp = 0; temp < nItems.getLength(); temp++) { // loop through the elements 
 				Element element = (Element)nItems.item(temp); 
 				String available = element.getElementsByTagName("available").item(0).getTextContent(); 

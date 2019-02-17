@@ -105,7 +105,7 @@ public class StorageplaceRepository {
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder(); 
 			Document doc = dBuilder.parse(new InputSource(new StringReader(xmlString)));
 			NodeList nStorageplaces = doc.getElementsByTagName("storageplace"); // extract a list of element from the tag structure 
-			System.out.println("length nStorageplaces: " + nStorageplaces.getLength()); // Printing lenght of nodelist
+			// System.out.println("length nStorageplaces: " + nStorageplaces.getLength()); // Printing lenght of nodelist
 			for (int temp = 0; temp < nStorageplaces.getLength(); temp++) { // loop through the elements 
 				Element element = (Element)nStorageplaces.item(temp); 
 				int storageplaceKey = Integer.parseInt(element.getElementsByTagName("storageplaceKey").item(0).getTextContent());
@@ -126,7 +126,7 @@ public class StorageplaceRepository {
 		} catch (IOException e5) {
 			System.err.println("A IO exception occured: " + e5.getMessage());
 		} 
-		System.out.println("Done parsing item-xml!"); 
+		//System.out.println("Done parsing Storageplace-xml!"); 
 			return storageplacesList;		
 		}
 }
