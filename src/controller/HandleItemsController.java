@@ -119,8 +119,8 @@ public class HandleItemsController {
     @FXML
     private ChoiceBox<Integer> categoryKeyChoiceBox;
     
-    HashMap<String, Integer> categoryWithId = new HashMap<>(); //Will store "categoryName" and "categoryKey"
-    HashMap<String, Integer> storageplaceWithId = new HashMap<>(); //Will store "storageplaceName" and "storageplaceKey"
+    HashMap<String, Integer> categoryWithId = new HashMap<>(); // Will store "categoryName" and "categoryKey"
+    HashMap<String, Integer> storageplaceWithId = new HashMap<>(); // Will store "storageplaceName" and "storageplaceKey"
     ArrayList<Item> itemsList;
     Item i;
     ItemRepository itemRepo = new ItemRepository();
@@ -133,7 +133,7 @@ public class HandleItemsController {
     //This method is automatically called after the fxml file has been loaded.
     @FXML
     private void initialize () {
-    	System.out.println("HandleItemsController initiated!");
+    //	System.out.println("HandleItemsController initiated!");
 	
     	// mouseclick eventhandler
     	itemTable.setOnMouseClicked(this::TableClicked);
@@ -170,15 +170,12 @@ public class HandleItemsController {
        i = itemTable.getSelectionModel().getSelectedItem();      
        itemKeyTxt.setText(String.valueOf(i.getItemKey())); // Convert to String.
        itemNameTxt.setText(i.getItemName());
-   //    categoryNameTxt.setText(i.getCategoryName()); //TODO TESTAR
      //  categoryKeyTxt.setText(String.valueOf(i.getCategoryKey()));
        alwaysAtHomeTxt.setText(String.valueOf(i.getUnitsAlways()));
        numberOfUnitsTxt.setText(String.valueOf(i.getNumberOfUnits()));
      //  storageplaceKeyTxt.setText(String.valueOf(i.getStorageplaceKey()));
        availableTxt.setText(i.getAvailable());
-    //   storageplaceNameTxt.setText(i.getStorageplaceName()); //TODO TESTAR
-       
-       
+          
        categoryChoiceBox.setValue(i.getCategoryName()); //Set categorychoicebox to category name
        categoryKeyTxt.setText(String.valueOf(categoryWithId.get(categoryChoiceBox.getValue()))); //Konvertera detta till en String.
 
@@ -187,21 +184,41 @@ public class HandleItemsController {
     	}
     }
     
+    /**
+     * category selected
+     *
+     * @param event the event
+     */
     @FXML
     void categorySelected(ActionEvent event) {
     	categoryKeyTxt.setText(String.valueOf(categoryWithId.get(categoryChoiceBox.getValue()))); //Konvertera detta till en String.
     }
     
+    /**
+     * Update Category choices list
+     *
+     * @param event the event
+     */
     @FXML
     void updateCategoryChoices(MouseEvent event) {
     	updateListOfCategories();
     }
     
+    /**
+     * Storage selected
+     *
+     * @param event the event
+     */
     @FXML
     void storageSelected(ActionEvent event) {
     	storageplaceKeyTxt.setText(String.valueOf(storageplaceWithId.get(storageChoiceBox.getValue()))); //Konvertera detta till en String.
     }
     
+    /**
+     * Update Storagplace choices list
+     *
+     * @param event the event
+     */
     @FXML
     void updateStorageplaceChoices(MouseEvent event) {
     	updateListOfStorageplaces();
@@ -219,33 +236,46 @@ public class HandleItemsController {
 			ObservableList<Item> list = FXCollections.observableArrayList(itemsList);
 			itemTable.setItems((ObservableList<Item>) list);
 		}
-		
+	
+	/**
+	 * Refresh table view.
+	 */
 	@FXML
 	void refreshTable(ActionEvent event) {
 		updateTable();
 		itemTable.refresh();
 	}
-		
+	
+	
+	 /**
+	  * Open Start View
+	  */
 	@FXML
     void openStartView(ActionEvent event) {
     	//System.out.println("Start view should open");
     	ViewController.activate("StartView");
     }
 	
+	 /**
+	  * Open Shopping List
+	  */
 	@FXML
     void openShoppingList(ActionEvent event) {
     	ViewController.activate("ShoppingList");
-    	System.out.println("ShoppingListView should be shown.");
+    	//System.out.println("ShoppingListView should be shown.");
     }
 	
+	 /**
+	  * Show All Items
+	  */
 	void showAllItems() {
-		System.out.println("showAllItems called");
+		//System.out.println("showAllItems called");
 		updateTable();
 	}
 
     @FXML
     void showSelectedItem(ActionEvent event) {
-    	System.out.println("showSelectedItem called");
+    	//System.out.println("showSelectedItem called");
     	String message = null;
     	//Text fields should not be empty
     	 if(!(itemKeyTxt.getText().length() > 0)) {
@@ -289,9 +319,14 @@ public class HandleItemsController {
 		}
     }
 	
+    /**
+	  * Add item
+	  * 
+	  * @param event the event
+	  */
 	@FXML
 	void addItem(ActionEvent event) {
-		System.out.println("addItem called");
+		//System.out.println("addItem called");
     	String message = null;
         //Text fields cannot be empty
         if(!(itemNameTxt.getText().length() > 0)) {
@@ -378,9 +413,13 @@ public class HandleItemsController {
         updateTable();
         itemTable.refresh();
         resetFields(); // empty text fields
-		//TODO
 	}
-	 
+	
+   /**
+	  * Update item
+	  * 
+	  * @param event the event
+	  */
 	@FXML
 	void updateItem(ActionEvent event) {
 		System.out.println("updateItem called");
@@ -472,6 +511,12 @@ public class HandleItemsController {
 		}
 	}
 	
+	
+	  /**
+	  * Delete item
+	  * 
+	  * @param event the event
+	  */
     @FXML
     void deleteItem(ActionEvent event) {
     	System.out.println("delete called - delete items not allowed");
@@ -480,8 +525,12 @@ public class HandleItemsController {
     	messageTextArea.setText(message);
     }
 
+    /**
+ 	  * Update List Of Categories
+ 	  * 
+ 	  */
     private void updateListOfCategories() {
-    	categoryWithId.clear();//TODO TEST
+    	categoryWithId.clear();
         //get repository
         CategoryRepository cr = new CategoryRepository();
         ArrayList<Category> categoryArray = cr.getAllCategories();
@@ -495,12 +544,16 @@ public class HandleItemsController {
         ObservableList<String> availableCategories = FXCollections.observableArrayList(categoryWithId.keySet());
         categoryChoiceBox.setItems(availableCategories);
 
-        updateTable(); //TODO TEST
+        updateTable();
         itemTable.refresh();
     }
     
+    /**
+	  * Update List Of Storageplaces
+	  * 
+	  */
     private void updateListOfStorageplaces() {
-    	storageplaceWithId.clear();//TODO TEST
+    	storageplaceWithId.clear();
     	
         //get repository
         StorageplaceRepository sr = new StorageplaceRepository();
@@ -515,26 +568,33 @@ public class HandleItemsController {
         ObservableList<String> availableStorageplaces = FXCollections.observableArrayList(storageplaceWithId.keySet());
         storageChoiceBox.setItems(availableStorageplaces);
         
-        updateTable(); //TODO TEST
-        itemTable.refresh(); //TODO TEST
+        updateTable();
+        itemTable.refresh();
     }
     
-    
+    /**
+	  * Reset All Fields
+	  * 
+	  * @param event the event
+	  * 
+	  */
     @FXML
     void resetAllFields(ActionEvent event) {
     	resetFields();
     }
-	   
+	
+    /**
+	  * Reset Fields
+	  * 
+	  */
     private void resetFields() {
     	itemKeyTxt.setText("");
         itemNameTxt.setText("");
-      //  categoryNameTxt.setText(""); //TODO to be deleted?
        // categoryKeyTxt.setText("");
         alwaysAtHomeTxt.setText("");
         numberOfUnitsTxt.setText("");
        // storageplaceKeyTxt.setText("");
         availableTxt.setText("");
-      //  storageplaceNameTxt.setText(""); //TODO to be deleted?
     }
     
     /**
